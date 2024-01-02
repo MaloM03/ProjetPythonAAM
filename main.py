@@ -1,8 +1,8 @@
 print("hello")
 print("hey")
-print ("Yo!")
-print ("Alicia")
-print (Arthur)
+print("Yo!")
+print("Alicia")
+print("Arthur")
 
 a = 8
 monTexte = "Voici mon texte"
