@@ -1,9 +1,9 @@
 # ProjetPythonAAM
-projet python UIMM
+projet python UIMM - ALicia, Athur et Malo
 
-ALICIA, ARHUR ET MALO
-TEST2 ARTHUR
-TT_ARTHUR
-
-TEST MALO COMMIT
-je comprends pas mais là ça marche !
+**CREATION APPLICATION (PROD et LOGISTIQUE)**
+ app desktop production 
+ app desktop logistique
+ 
+**SERVER OODO avec Base SQL**
+  herberge la base SQL pour recevoir et stocker les données du projet
