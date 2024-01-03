@@ -62,7 +62,7 @@ class ConnectionApp:
             # Effacement des champs de saisie
             self.user_entry.delete(0, "end")
             self.password_entry.delete(0, "end")
-
+            
 if __name__ == "__main__":
     # Création de la fenêtre principale
     root = tk.Tk()
