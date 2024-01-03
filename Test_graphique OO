@@ -1,9 +1,12 @@
 import tkinter as tk
+global user_name
+global password
 
-class ConnectionApp:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Connection")
+
+class Connection:
+    def __init__(self, connection_page):
+        self.ID = connection_page
+        self.ID.title("Connection")
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
@@ -11,20 +14,20 @@ class ConnectionApp:
     def create_widgets(self):
         #===== USER =====
         # Création d'une étiquette
-        user_label = tk.Label(self.root, text="User : ")
+        user_label = tk.Label(self.ID, text="User : ")
         user_label.pack()
 
         # Création d'une zone de saisie
-        self.user_entry = tk.Entry(self.root)
+        self.user_entry = tk.Entry(self.ID)
         self.user_entry.pack()
 
         #===== PASSWORD =====
         # Création d'une étiquette
-        password_label = tk.Label(self.root, text="Password : ")
+        password_label = tk.Label(self.ID, text="Password : ")
         password_label.pack()
 
         # Création d'une zone de saisie
-        self.password_entry = tk.Entry(self.root, show='*')
+        self.password_entry = tk.Entry(self.ID, show='*')
         self.password_entry.pack()
 
         # Lier l'événement de pression de la touche Entrée à la fonction Validation
@@ -33,6 +36,7 @@ class ConnectionApp:
     def validation(self, event):
         user_name = self.user_entry.get()
         password = self.password_entry.get()
+        Identifiant = user_name + password
 
         # Vérification des identifiants
         code = (user_name.lower() == "a" and password.lower() == "s") or \
@@ -40,19 +44,18 @@ class ConnectionApp:
                (user_name.lower() == "m" and password.lower() == "m")
 
         if code:
-            # Création d'une nouvelle fenêtre
-            app = tk.Tk()
-            app.title("ERP.Production")
-
-            # Ajout des éléments à la nouvelle fenêtre
-            new_label = tk.Label(app, text="Bienvenue sur la deuxième page !")
-            new_label.pack()
-
             # Fermeture auto de la fenêtre de connexion
-            self.root.destroy()
+            self.ID.destroy()
+
+            # Création de l'application de connexion
+            #prod_page.deiconify()
+            #prod_page.mainloop()
+            prod_app = Application(self.prod_page, Identifiant)
+
+            
         else:
             # Création d'une fenêtre d'erreur
-            error_window = tk.Toplevel(self.root)
+            error_window = tk.Toplevel(self.ID)
             error_window.title("Error")
 
             # Ajout des éléments à la fenêtre d'erreur
@@ -62,13 +65,41 @@ class ConnectionApp:
             # Effacement des champs de saisie
             self.user_entry.delete(0, "end")
             self.password_entry.delete(0, "end")
-            
+
+class Application : 
+    
+
+    def __init__(self, prod_page, Identifiant):
+        self.production = prod_page
+        self.production.title("Application Production" + Identifiant)
+
+        # Création des widgets pour l'interface utilisateur
+        self.create_widgets()
+
+    def create_widgets(self):
+
+        #===== PRODUITS =====
+        # Création d'une étiquette
+        user_label = tk.Label(self.production, text= "Produit")
+        user_label.pack()
+
+        # Création d'une zone de saisie
+        self.user_entry = tk.Entry(self.production)
+        self.user_entry.pack()
+
+        
+
 if __name__ == "__main__":
     # Création de la fenêtre principale
-    root = tk.Tk()
+    connection_page = tk.Tk()
 
+    prod_page = tk.Tk()
+    prod_page.withdraw()
+    
     # Création de l'application de connexion
-    connection_app = ConnectionApp(root)
+    connection_app = Connection(connection_page) 
+
+    prod_app= Application(prod_page,connection_page)
 
     # Lancement de la boucle principale
-    root.mainloop()
+    connection_page.mainloop()
