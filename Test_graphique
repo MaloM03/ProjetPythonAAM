@@ -1,19 +1,33 @@
 import tkinter as tk
 
-
 def Validation(event):
     UserName = user_entry.get()
     Password = password_entry.get()
-    # Création d'une nouvelle fenêtre
-    App = tk.Tk()
-    App.title("ERP.Production")
+   
+    if UserName.lower() == "a"  and Password.lower() == "s":
+         # Création d'une nouvelle fenêtre
+         App = tk.Tk()
+         App.title("ERP.Production")
 
-    # Ajoutez des éléments à la nouvelle fenêtre
-    new_label = tk.Label(App, text="Bienvenue sur la deuxième page !")
-    new_label.pack()
+         # Ajoutez des éléments à la nouvelle fenêtre
+         new_label = tk.Label(App, text="Bienvenue sur la deuxième page !")
+         new_label.pack()
 
-    #fermeture auto de la fenetre de connection
-    Connection.destroy()
+         #fermeture auto de la fenetre de connection et Error
+         Connection.destroy()
+         
+         
+    else:
+         #Création d'une fenêtre d'erreur
+         Error = tk.Tk()
+         Error.title("Error")
+
+         # Ajoutez des éléments à lafenêtre d'erreur
+         new_label = tk.Label(Error, text="User/ Password incorect")
+         new_label.pack()
+         user_entry.delete(0,"end")
+         password_entry.delete(0,"end")
+   
 
 # Création de la fenêtre principale
 Connection = tk.Tk()
