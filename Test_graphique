@@ -4,7 +4,7 @@ def Validation(event):
     UserName = user_entry.get()
     Password = password_entry.get()
    
-    if UserName.lower() == "a"  and Password.lower() == "s":
+    if (UserName.lower() == "a.s"  and Password.lower() == "s") or (UserName.lower() == "a.c"  and Password.lower() == "c") or (UserName.lower() == "m.m"  and Password.lower() == "m"):
          # Création d'une nouvelle fenêtre
          App = tk.Tk()
          App.title("ERP.Production")
@@ -16,7 +16,7 @@ def Validation(event):
          #fermeture auto de la fenetre de connection et Error
          Connection.destroy()
          
-         
+
     else:
          #Création d'une fenêtre d'erreur
          Error = tk.Tk()
