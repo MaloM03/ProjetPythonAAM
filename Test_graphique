@@ -1,24 +1,39 @@
 import tkinter as tk
 
 # Fonction appelée lorsque la touche Entrée est pressée
-def on_enter_key(event):
+def TouchEntrée(event):
     label.config(text=" "+ entry.get())
     entry.delete(0, 'end')
 
-# Création de la fenêtre principale
-window = tk.Tk()
-window.title("ERP.Production")
+# Création des fenêtres
+Connection = tk.Tk()
+Connection.title("Connection")
 
-# Création d'une étiquette
-label = tk.Label(window, text="User :")
+App = tk.Tk()
+App.title("ERP.Production")
+
+#===== User =====
+
+# Création d'une étiquette User
+label = tk.Label(Connection, text="User :")
 label.pack()
 
-# Création d'une zone de saisie
-entry = tk.Entry(window)
+# Création d'une zone de saisie User 
+entry = tk.Entry(Connection)
+entry.pack()
+
+#===== Password =====
+
+# Création d'une étiquette Password
+label = tk.Label(Connection, text="Password :")
+label.pack()
+
+# Création d'une zone de saisie Password
+entry = tk.Entry(Connection)
 entry.pack()
 
 # Lier l'événement de pression de la touche Entrée à la fonction
-entry.bind("<Return>", on_enter_key)
+entry.bind(App.mainloop(), TouchEntrée)
 
 # Lancement de la boucle principale
-window.mainloop()
+Connection.mainloop()
