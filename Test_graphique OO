@@ -36,7 +36,6 @@ class Connection:
     def validation(self, event):
         user_name = self.user_entry.get()
         password = self.password_entry.get()
-        Identifiant = user_name + password
 
         # Vérification des identifiants
         code = (user_name.lower() == "a" and password.lower() == "s") or \
@@ -48,9 +47,8 @@ class Connection:
             self.ID.destroy()
 
             # Création de l'application de connexion
-            #prod_page.deiconify()
-            #prod_page.mainloop()
-            prod_app = Application(self.prod_page, Identifiant)
+            prod_page.deiconify()
+            
 
             
         else:
@@ -69,9 +67,9 @@ class Connection:
 class Application : 
     
 
-    def __init__(self, prod_page, Identifiant):
+    def __init__(self, prod_page, user_name):
         self.production = prod_page
-        self.production.title("Application Production" + Identifiant)
+        self.production.title("Application Production")
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
