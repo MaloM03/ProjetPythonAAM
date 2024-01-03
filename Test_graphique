@@ -1,39 +1,39 @@
 import tkinter as tk
 
-# Fonction appelée lorsque la touche Entrée est pressée
-def TouchEntrée(event):
-    label.config(text=" "+ entry.get())
-    entry.delete(0, 'end')
+def Validation(event):
+    name = entry.get()
+    entry.delete(0, 'end')  # Efface le contenu de la zone de saisie
+    
+    # Création d'une nouvelle fenêtre
+    App = tk.Toplevel(Connection)
+    App.title("ERP.Production")
 
-# Création des fenêtres
+    # Ajoutez des éléments à la nouvelle fenêtre
+    new_label = tk.Label(App, text="Bienvenue sur la deuxième page !")
+    new_label.pack()
+
+# Création de la fenêtre principale
 Connection = tk.Tk()
 Connection.title("Connection")
 
-App = tk.Tk()
-App.title("ERP.Production")
-
-#===== User =====
-
-# Création d'une étiquette User
-label = tk.Label(Connection, text="User :")
+# Création d'une étiquette
+label = tk.Label(Connection, text="User : ")
 label.pack()
 
-# Création d'une zone de saisie User 
+# Création d'une zone de saisie
 entry = tk.Entry(Connection)
 entry.pack()
 
-#===== Password =====
-
-# Création d'une étiquette Password
-label = tk.Label(Connection, text="Password :")
+# Création d'une étiquette
+label = tk.Label(Connection, text="Password : ")
 label.pack()
 
-# Création d'une zone de saisie Password
+# Création d'une zone de saisie
 entry = tk.Entry(Connection)
 entry.pack()
 
 # Lier l'événement de pression de la touche Entrée à la fonction
-entry.bind(App.mainloop(), TouchEntrée)
+entry.bind("<Return>", Validation)
 
 # Lancement de la boucle principale
 Connection.mainloop()
