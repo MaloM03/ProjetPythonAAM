@@ -3,8 +3,25 @@ import tkinter as tk
 def Validation(event):
     UserName = user_entry.get()
     Password = password_entry.get()
+    
+    Code = (UserName.lower() == "a"  and Password.lower() == "s") or \
+       (UserName.lower() == "a"  and Password.lower() == "c") or \
+       (UserName.lower() == "m"  and Password.lower() == "m")
+    
+    
    
-    if (UserName.lower() == "a.s"  and Password.lower() == "s") or (UserName.lower() == "a.c"  and Password.lower() == "c") or (UserName.lower() == "m.m"  and Password.lower() == "m"):
+    if not Code : 
+         #Création d'une fenêtre d'erreur
+         fenetredemerde = tk.Toplevel(Connection)
+         fenetredemerde.title("Error")
+
+         # Ajoutez des éléments à lafenêtre d'erreur
+         new_label = tk.Label(fenetredemerde, text="User/ Password incorect")
+         new_label.pack()
+         user_entry.delete(0,"end")
+         password_entry.delete(0,"end")
+
+    if Code:
          # Création d'une nouvelle fenêtre
          App = tk.Tk()
          App.title("ERP.Production")
@@ -16,23 +33,15 @@ def Validation(event):
          #fermeture auto de la fenetre de connection et Error
          Connection.destroy()
          
-
-    else:
-         #Création d'une fenêtre d'erreur
-         Error = tk.Tk()
-         Error.title("Error")
-
-         # Ajoutez des éléments à lafenêtre d'erreur
-         new_label = tk.Label(Error, text="User/ Password incorect")
-         new_label.pack()
-         user_entry.delete(0,"end")
-         password_entry.delete(0,"end")
-   
-
+         
+             
+         
+       
 # Création de la fenêtre principale
 Connection = tk.Tk()
 Connection.title("Connection")
 
+#===== USER =====
 # Création d'une étiquette
 user_label = tk.Label(Connection, text="User : ")
 user_label.pack()
@@ -41,6 +50,7 @@ user_label.pack()
 user_entry = tk.Entry(Connection)
 user_entry.pack()
 
+#===== PASSWORD =====
 # Création d'une étiquette
 password_label = tk.Label(Connection, text="Password : ")
 password_label.pack()
