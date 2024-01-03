@@ -5,12 +5,15 @@ def Validation(event):
     entry.delete(0, 'end')  # Efface le contenu de la zone de saisie
     
     # Création d'une nouvelle fenêtre
-    App = tk.Toplevel(Connection)
+    App = tk.Tk()
     App.title("ERP.Production")
 
     # Ajoutez des éléments à la nouvelle fenêtre
     new_label = tk.Label(App, text="Bienvenue sur la deuxième page !")
     new_label.pack()
+
+    #fermeture auto de la fenetre de connection
+    Connection.destroy()
 
 # Création de la fenêtre principale
 Connection = tk.Tk()
