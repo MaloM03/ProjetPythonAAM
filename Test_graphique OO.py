@@ -64,7 +64,7 @@ class Connection:
             self.password_entry.delete(0, "end")
 '''
 class Application : 
-    
+#=====CREATION DE LA PAGE APPLICATION===== 
     def __init__(self, prod_page, user_name):
         self.production = prod_page
         self.production.title("Application Production")
@@ -75,9 +75,8 @@ class Application :
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
 
+#===== TABLEAU PRODUITS =====
     def create_widgets(self):
-
-        #===== TABLEAU PRODUITS =====
         # Création du Treeview (tableau)
         self.tree = ttk.Treeview(self.production, columns=("Nom", "N° OF", "Quantité à produire", "Echéance"))
 
@@ -93,6 +92,7 @@ class Application :
 
         # Affichage du tableau
         self.tree.grid(row=0, column=0, sticky="nsew")
+        
 
         # Configuration du redimensionnement de la fenêtre
         self.production.grid_rowconfigure(0, weight=1)
@@ -101,13 +101,14 @@ class Application :
         # Suppression de la colonne d'ID
         self.tree.column("#0", width=0, stretch=tk.NO)
 
-        #===== SAISIE DE L'AJOUT DE PRODUCTION
-        prod_label = tk.Label(self.production, text="Ajouter une production : ")
-        prod_label.grid(row=5, column=0)
+#===== SAISIE DE L'AJOUT DE PRODUCTION=====
+        # Ajout du label sous le tableau
+        prod_label = tk.Label(self.production, text="Ajouter une production")
+        prod_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
 
-        # Création d'une zone de saisie
-        self.prod_entry = tk.Entry(self.production)
-        self.prod_entry.grid(row=5, column=1)
+        # Ajout de la zone de saisie sous le label
+        self.entry_under_label = tk.Entry(self.production)
+        self.entry_under_label.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
 
     def add_data_to_table(self):
         # Ajoutez vos données au tableau
@@ -119,6 +120,7 @@ class Application :
         ]
         for item in data:
             self.tree.insert("", "end", values=item)
+
 
         
    
@@ -140,3 +142,5 @@ if __name__ == "__main__":
 
     # Lancement de l'application
     connection_page.mainloop()
+
+
