@@ -49,7 +49,33 @@ docker run -d -p 9000:9000 --name portainer \
     -v portainer_data:/data \
     portainer/portainer-ce:latest
 ```
-Verifier que portainer soit bien installer en allant sur :
+Verifier que portainer soit bien installé en allant sur :
 ```bash
 http://0.0.0.0:9000
+```
+## Instalation du stack odoo sur docker
+créer un stack du nom de odoo70 en mettant la config suivante:
+```yml
+version: '2'
+services:
+  web:
+    image: odoo:16.0
+    depends_on:
+      - mydb
+    ports:
+      - "8069:8069"
+    environment:
+    - HOST=mydb
+    - USER=odoo
+    - PASSWORD=myodoo
+  mydb:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=myodoo
+      - POSTGRES_USER=odoo
+```
+Valider puis attendre l'instalation des deux conteneurs odoo et base de données puis aller sur :
+```bash
+http://0.0.0.0:8069
 ```
