@@ -170,7 +170,8 @@ class Application :
         self.tree.heading("Echéance", text="Echéance")
 
         # Ajout des données au tableau
-        self.add_data_to_table()
+        #self.add_data_to_table()
+        self.refresh_data_table()
 
         # Affichage du tableau
         self.tree.grid(row=0, column=0, sticky="nsew")
@@ -210,13 +211,30 @@ class Application :
            self.tree.delete(item)
 
         # Ajoutez vos données au tableau
-        data = [
-            (Article, OF,(QDP,"/",QAP), DATE),
-            (Article, OF,((QDP2),"/",QAP), DATE),
-    
-         ]
+        #data = [
+        #    (Article, OF,(QDP,"/",QAP), DATE),
+        #    (Article, OF,((QDP2),"/",QAP), DATE),]
+        data = self.transform_data(mo_list)
         for item in data:
             self.tree.insert("", "end", values=item)
+
+    def refresh_data_table(self):
+        pass
+
+    def transform_data(input_data):
+        transformed_data = []
+    
+        for item in input_data:
+            article = item['product_id'][1]
+            of = item['name']
+            qdp = item['qty_producing']
+            qap = item['product_qty']
+            date = item['date_planned_start']
+
+            data_item = (article, of, (qdp, "/", qap), date)
+            transformed_data.append(data_item)
+
+        return transformed_data
 
     def validate_entry(self): 
          # Fonction appelée lors de la validation du bouton
@@ -226,12 +244,15 @@ class Application :
          self.AjoutProd.delete(0, 'end')
     
 
+
 if __name__ == "__main__":
 
     ifOdoo = IF_ErpOdoo("172.31.10.171", "8069","amaDB", "vente", "ventepython2024")
     ifOdoo.connect()
     ifOdoo.getFields()
     ifOdoo.getManufOrderToDo()
+    #print(mo_list)
+    #print(Application.transform_data(mo_list))
 
     # Création de la fenêtre principale
     prod_page = tk.Tk()
