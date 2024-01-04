@@ -72,10 +72,24 @@ class IF_ErpOdoo:
                 for k in mo_dico.keys():
                     print(f' - {k} : {mo_dico[k]}')
 
+    def getArticle(self):
+        if self.mModels is not None:
+            fields = ['product_id', 'qty_producing']
+            limit = 100
+            mo_list = self.mModels.execute_kw(self.mErpDB,self.mUser_id,self.mErpPwd,
+                'mrp.production','search_read',
+                [],
+                {'fields': fields, 'limit': limit})
+            for mo_dico in mo_list:
+                print(f'----------------------------')
+                for k in mo_dico.keys():
+                    print(f' - {k} : {mo_dico[k]}')
+            
+
 #=================================================================
         
 if __name__ == "__main__":
     ifOdoo = IF_ErpOdoo("172.31.10.171", "8069","amaDB", "vente", "ventepython2024")
     ifOdoo.connect()
     ifOdoo.getFields()
-    ifOdoo.getManufOrderToDo()
+    ifOdoo.getArticle()
