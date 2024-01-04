@@ -75,6 +75,7 @@ class Application :
         self.production.geometry("800x300+750+300")
 
         self.AjoutProd = tk.Entry(self.production)
+        
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
@@ -124,7 +125,9 @@ class Application :
         OF = "45785"
         QAP = 5000
         QDP = self.AjoutProd.get()
+        QDP2 = (QDP + self.AjoutProd.get())
         DATE = "05/01/2024"
+
         # Efface toutes les lignes actuelles du tableau
         for item in self.tree.get_children():
            self.tree.delete(item)
@@ -132,19 +135,19 @@ class Application :
         # Ajoutez vos données au tableau
         data = [
             (Article, OF,(QDP,"/",QAP), DATE),
-            #("2", "Valeur2-1", "Valeur2-2", "Valeur2-3", "Valeur2-4"),
-            #("3", "Valeur3-1", "Valeur3-2", "Valeur3-3", "Valeur3-4"),
-            # ... Ajoutez autant de lignes que nécessaire
-        ]
+            (Article, OF,((QDP2),"/",QAP), DATE),
+    
+         ]
         for item in data:
             self.tree.insert("", "end", values=item)
 
-    def validate_entry(self):
-        # Fonction appelée lors de la validation du bouton
-        self.add_data_to_table()
+    def validate_entry(self): 
+         # Fonction appelée lors de la validation du bouton
+         self.add_data_to_table()
 
-        # Efface la saisie AjoutProd après la validation
-        self.AjoutProd.delete(0, 'end')
+         # Efface la saisie AjoutProd après la validation
+         self.AjoutProd.delete(0, 'end')
+    
 
 if __name__ == "__main__":
     # Création de la fenêtre principale
