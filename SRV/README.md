@@ -40,3 +40,16 @@ sudo systemctl status docker
 ```bash
 docker --version
 ```
+## Instalation de Portainer (interface graphique pour docker)
+## Mise en place du conteneur Portainer
+```bash
+docker run -d -p 9000:9000 --name portainer \
+    --restart=always \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v portainer_data:/data \
+    portainer/portainer-ce:latest
+```
+Verifier que portainer soit bien installer en allant sur :
+```bash
+http://0.0.0.0:9000
+```
