@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
-'''
+
+'''#=====PAGE DE CONNECTION=====
 class Connection:
     def __init__(self, connection_page):
         self.ID = connection_page
@@ -48,12 +49,11 @@ class Connection:
             # Affichage de l'application 
             prod_page.deiconify()
             
-
-            
         else:
             # Création d'une fenêtre d'erreur
             error_window = tk.Toplevel(self.ID)
             error_window.title("Error")
+            error_window.geometry("200x60+850+350")
 
             # Ajout des éléments à la fenêtre d'erreur
             error_label = tk.Label(error_window, text="User/Password incorrect")
@@ -63,7 +63,9 @@ class Connection:
             self.user_entry.delete(0, "end")
             self.password_entry.delete(0, "end")
 '''
+#=====PAGE D'APPLICATION=====
 class Application : 
+    
 #=====CREATION DE LA PAGE APPLICATION===== 
     def __init__(self, prod_page, user_name):
         self.production = prod_page
@@ -71,6 +73,8 @@ class Application :
        
         # Définir la taille initiale de la fenêtre
         self.production.geometry("800x300+750+300")
+
+        self.AjoutProd = tk.Entry(self.production)
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
@@ -107,13 +111,22 @@ class Application :
         prod_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
 
         # Ajout de la zone de saisie sous le label
-        self.entry_under_label = tk.Entry(self.production)
-        self.entry_under_label.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
+        self.AjoutProd = tk.Entry(self.production)
+        self.AjoutProd.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
+
+        # Lier l'événement de pression de la touche Entrée à la fonction Validation
+        self.AjoutProd.bind("<Return>", self.add_data_to_table)
+        
 
     def add_data_to_table(self):
+        Article = "Peluche 1"
+        OF = "45785"
+        QAP = 5000
+        QDP = self.AjoutProd.get()
+        DATE = "05/01/2024"
         # Ajoutez vos données au tableau
         data = [
-            ("Peluche 1", "0555", "2000/5000", "05/01/2024", "Valeur1-4"),
+            (Article, OF,(QDP,"/",QAP), DATE),
             #("2", "Valeur2-1", "Valeur2-2", "Valeur2-3", "Valeur2-4"),
             #("3", "Valeur3-1", "Valeur3-2", "Valeur3-3", "Valeur3-4"),
             # ... Ajoutez autant de lignes que nécessaire
@@ -121,17 +134,10 @@ class Application :
         for item in data:
             self.tree.insert("", "end", values=item)
 
-
-        
-   
-        
-
-        
-
 if __name__ == "__main__":
     # Création de la fenêtre principale
     prod_page = tk.Tk()
-    #prod_page.withdraw()
+   # prod_page.withdraw()
 
     # Création de la fenetre de loging
     connection_page = tk.Tk()
