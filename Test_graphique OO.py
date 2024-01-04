@@ -1,12 +1,10 @@
 import tkinter as tk
-global user_name
-global password
-
 
 class Connection:
     def __init__(self, connection_page):
         self.ID = connection_page
         self.ID.title("Connection")
+        self.ID.geometry("200x150+850+300")
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
@@ -46,7 +44,7 @@ class Connection:
             # Fermeture auto de la fenêtre de connexion
             self.ID.destroy()
 
-            # Création de l'application de connexion
+            # Affichage de l'application 
             prod_page.deiconify()
             
 
@@ -66,10 +64,12 @@ class Connection:
 
 class Application : 
     
-
     def __init__(self, prod_page, user_name):
         self.production = prod_page
         self.production.title("Application Production")
+       
+        # Définir la taille initiale de la fenêtre
+        self.production.geometry("400x300+750+300")
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
@@ -79,25 +79,28 @@ class Application :
         #===== PRODUITS =====
         # Création d'une étiquette
         user_label = tk.Label(self.production, text= "Produit")
-        user_label.pack()
+        user_label.grid(row=0, column=0, sticky="e")
+        user_label = tk.Label(self.production, text= "Produit")
+        user_label.grid(row=1, column=0, sticky="e")
 
         # Création d'une zone de saisie
         self.user_entry = tk.Entry(self.production)
-        self.user_entry.pack()
+        self.user_entry.grid(row=2, column=1)
+        
 
         
 
 if __name__ == "__main__":
     # Création de la fenêtre principale
-    connection_page = tk.Tk()
-
     prod_page = tk.Tk()
     prod_page.withdraw()
-    
+
+    # Création de la fenetre de loging
+    connection_page = tk.Tk()
+
     # Création de l'application de connexion
     connection_app = Connection(connection_page) 
-
     prod_app= Application(prod_page,connection_page)
 
-    # Lancement de la boucle principale
+    # Lancement de l'application
     connection_page.mainloop()
