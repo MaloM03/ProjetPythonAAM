@@ -1,5 +1,6 @@
 import tkinter as tk
-
+from tkinter import ttk
+'''
 class Connection:
     def __init__(self, connection_page):
         self.ID = connection_page
@@ -61,31 +62,68 @@ class Connection:
             # Effacement des champs de saisie
             self.user_entry.delete(0, "end")
             self.password_entry.delete(0, "end")
-
+'''
 class Application : 
-    
+#=====CREATION DE LA PAGE APPLICATION===== 
     def __init__(self, prod_page, user_name):
         self.production = prod_page
         self.production.title("Application Production")
        
         # Définir la taille initiale de la fenêtre
-        self.production.geometry("400x300+750+300")
+        self.production.geometry("800x300+750+300")
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
 
+#===== TABLEAU PRODUITS =====
     def create_widgets(self):
+        # Création du Treeview (tableau)
+        self.tree = ttk.Treeview(self.production, columns=("Nom", "N° OF", "Quantité à produire", "Echéance"))
 
-        #===== PRODUITS =====
-        # Création d'une étiquette
-        user_label = tk.Label(self.production, text= "Produit")
-        user_label.grid(row=0, column=0, sticky="e")
-        user_label = tk.Label(self.production, text= "Produit")
-        user_label.grid(row=1, column=0, sticky="e")
+        # Configuration des colonnes
+        
+        self.tree.heading("Nom", text="Nom")
+        self.tree.heading("N° OF", text="N° OF")
+        self.tree.heading("Quantité à produire", text="Quantité à produire")
+        self.tree.heading("Echéance", text="Echéance")
 
-        # Création d'une zone de saisie
-        self.user_entry = tk.Entry(self.production)
-        self.user_entry.grid(row=2, column=1)
+        # Ajout des données au tableau
+        self.add_data_to_table()
+
+        # Affichage du tableau
+        self.tree.grid(row=0, column=0, sticky="nsew")
+        
+
+        # Configuration du redimensionnement de la fenêtre
+        self.production.grid_rowconfigure(0, weight=1)
+        self.production.grid_columnconfigure(0, weight=1)
+
+        # Suppression de la colonne d'ID
+        self.tree.column("#0", width=0, stretch=tk.NO)
+
+#===== SAISIE DE L'AJOUT DE PRODUCTION=====
+        # Ajout du label sous le tableau
+        prod_label = tk.Label(self.production, text="Ajouter une production")
+        prod_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
+
+        # Ajout de la zone de saisie sous le label
+        self.entry_under_label = tk.Entry(self.production)
+        self.entry_under_label.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
+
+    def add_data_to_table(self):
+        # Ajoutez vos données au tableau
+        data = [
+            ("Peluche 1", "0555", "2000/5000", "05/01/2024", "Valeur1-4"),
+            #("2", "Valeur2-1", "Valeur2-2", "Valeur2-3", "Valeur2-4"),
+            #("3", "Valeur3-1", "Valeur3-2", "Valeur3-3", "Valeur3-4"),
+            # ... Ajoutez autant de lignes que nécessaire
+        ]
+        for item in data:
+            self.tree.insert("", "end", values=item)
+
+
+        
+   
         
 
         
@@ -93,14 +131,16 @@ class Application :
 if __name__ == "__main__":
     # Création de la fenêtre principale
     prod_page = tk.Tk()
-    prod_page.withdraw()
+    #prod_page.withdraw()
 
     # Création de la fenetre de loging
     connection_page = tk.Tk()
 
     # Création de l'application de connexion
-    connection_app = Connection(connection_page) 
+   # connection_app = Connection(connection_page) 
     prod_app= Application(prod_page,connection_page)
 
     # Lancement de l'application
     connection_page.mainloop()
+
+
