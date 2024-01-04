@@ -55,7 +55,7 @@ http://0.0.0.0:9000
 ```
 ## Instalation du stack odoo sur docker
 créer un stack du nom de odoo70 en mettant la config suivante:
-'''yml
+```yml
 version: '2'
 services:
   web:
@@ -74,8 +74,8 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=myodoo
       - POSTGRES_USER=odoo
-'''
+```
 Valider puis attendre l'instalation des deux conteneurs odoo et base de données puis aller sur :
-'''bash
+```bash
 http://0.0.0.0:8069
-'''
+```
