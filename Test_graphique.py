@@ -8,20 +8,8 @@ def Validation(event):
        (UserName.lower() == "a"  and Password.lower() == "c") or \
        (UserName.lower() == "m"  and Password.lower() == "m")
     
-    
-   
-    if not Code : 
-         #Création d'une fenêtre d'erreur
-         fenetredemerde = tk.Toplevel(Connection)
-         fenetredemerde.title("Error")
 
-         # Ajoutez des éléments à lafenêtre d'erreur
-         new_label = tk.Label(fenetredemerde, text="User/ Password incorect")
-         new_label.pack()
-         user_entry.delete(0,"end")
-         password_entry.delete(0,"end")
-
-    if Code:
+    if Code : 
          # Création d'une nouvelle fenêtre
          App = tk.Tk()
          App.title("ERP.Production")
@@ -32,11 +20,18 @@ def Validation(event):
 
          #fermeture auto de la fenetre de connection et Error
          Connection.destroy()
-         
-         
-             
-         
-       
+
+    else : 
+         #Création d'une fenêtre d'erreur
+         fenetredemerde = tk.Toplevel(Connection)
+         fenetredemerde.title("Error")
+
+         # Ajoutez des éléments à lafenêtre d'erreur
+         new_label = tk.Label(fenetredemerde, text="User/ Password incorect")
+         new_label.pack()
+         user_entry.delete(0,"end")
+         password_entry.delete(0,"end")
+                   
 # Création de la fenêtre principale
 Connection = tk.Tk()
 Connection.title("Connection")
@@ -64,3 +59,4 @@ password_entry.bind("<Return>", Validation)
 
 # Lancement de la boucle principale
 Connection.mainloop()
+
