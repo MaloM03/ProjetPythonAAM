@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-'''#=====PAGE DE CONNECTION=====
+#=====PAGE DE CONNECTION=====
 class Connection:
     def __init__(self, connection_page):
         self.ID = connection_page
@@ -62,7 +62,7 @@ class Connection:
             # Effacement des champs de saisie
             self.user_entry.delete(0, "end")
             self.password_entry.delete(0, "end")
-'''
+
 #=====PAGE D'APPLICATION=====
 class Application : 
     
@@ -152,13 +152,13 @@ class Application :
 if __name__ == "__main__":
     # Création de la fenêtre principale
     prod_page = tk.Tk()
-    #prod_page.withdraw()
+    prod_page.withdraw()
 
     # Création de la fenetre de loging
     connection_page = tk.Tk()
 
     # Création de l'application de connexion
-    #connection_app = Connection(connection_page) 
+    connection_app = Connection(connection_page) 
     prod_app= Application(prod_page,connection_page)
 
     # Lancement de l'application
