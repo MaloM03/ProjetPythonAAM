@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 
-#=====PAGE DE CONNECTION=====
+'''#=====PAGE DE CONNECTION=====
 class Connection:
     def __init__(self, connection_page):
         self.ID = connection_page
@@ -62,7 +62,7 @@ class Connection:
             # Effacement des champs de saisie
             self.user_entry.delete(0, "end")
             self.password_entry.delete(0, "end")
-
+'''
 #=====PAGE D'APPLICATION=====
 class Application : 
     
@@ -75,6 +75,7 @@ class Application :
         self.production.geometry("800x300+750+300")
 
         self.AjoutProd = tk.Entry(self.production)
+        
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
@@ -124,7 +125,9 @@ class Application :
         OF = "45785"
         QAP = 5000
         QDP = self.AjoutProd.get()
+        QDP2 = (QDP + self.AjoutProd.get())
         DATE = "05/01/2024"
+
         # Efface toutes les lignes actuelles du tableau
         for item in self.tree.get_children():
            self.tree.delete(item)
@@ -132,30 +135,30 @@ class Application :
         # Ajoutez vos données au tableau
         data = [
             (Article, OF,(QDP,"/",QAP), DATE),
-            #("2", "Valeur2-1", "Valeur2-2", "Valeur2-3", "Valeur2-4"),
-            #("3", "Valeur3-1", "Valeur3-2", "Valeur3-3", "Valeur3-4"),
-            # ... Ajoutez autant de lignes que nécessaire
-        ]
+            (Article, OF,((QDP2),"/",QAP), DATE),
+    
+         ]
         for item in data:
             self.tree.insert("", "end", values=item)
 
-    def validate_entry(self):
-        # Fonction appelée lors de la validation du bouton
-        self.add_data_to_table()
+    def validate_entry(self): 
+         # Fonction appelée lors de la validation du bouton
+         self.add_data_to_table()
 
-        # Efface la saisie AjoutProd après la validation
-        self.AjoutProd.delete(0, 'end')
+         # Efface la saisie AjoutProd après la validation
+         self.AjoutProd.delete(0, 'end')
+    
 
 if __name__ == "__main__":
     # Création de la fenêtre principale
     prod_page = tk.Tk()
-    prod_page.withdraw()
+    #prod_page.withdraw()
 
     # Création de la fenetre de loging
     connection_page = tk.Tk()
 
     # Création de l'application de connexion
-    connection_app = Connection(connection_page) 
+    #connection_app = Connection(connection_page) 
     prod_app= Application(prod_page,connection_page)
 
     # Lancement de l'application
