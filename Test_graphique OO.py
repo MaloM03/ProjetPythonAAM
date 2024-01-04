@@ -114,8 +114,9 @@ class Application :
         self.AjoutProd = tk.Entry(self.production)
         self.AjoutProd.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
 
-        # Lier l'événement de pression de la touche Entrée à la fonction Validation
-        self.AjoutProd.bind("<Return>", self.add_data_to_table)
+        # Ajout du bouton de validation
+        validate_button = tk.Button(self.production, text="Valider", command=self.validate_entry)
+        validate_button.grid(row=3, column=0, sticky="nsew", padx=5, pady=5)
         
 
     def add_data_to_table(self):
@@ -124,6 +125,10 @@ class Application :
         QAP = 5000
         QDP = self.AjoutProd.get()
         DATE = "05/01/2024"
+        # Efface toutes les lignes actuelles du tableau
+        for item in self.tree.get_children():
+           self.tree.delete(item)
+           
         # Ajoutez vos données au tableau
         data = [
             (Article, OF,(QDP,"/",QAP), DATE),
@@ -133,6 +138,13 @@ class Application :
         ]
         for item in data:
             self.tree.insert("", "end", values=item)
+
+    def validate_entry(self):
+        # Fonction appelée lors de la validation du bouton
+        self.add_data_to_table()
+
+        # Efface la saisie AjoutProd après la validation
+        self.AjoutProd.delete(0, 'end')
 
 if __name__ == "__main__":
     # Création de la fenêtre principale
