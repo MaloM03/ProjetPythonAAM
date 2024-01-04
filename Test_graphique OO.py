@@ -157,6 +157,8 @@ class Application :
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
 
+        
+
 #===== TABLEAU PRODUITS =====
     def create_widgets(self):
         # Création du Treeview (tableau)
@@ -170,8 +172,10 @@ class Application :
         self.tree.heading("Echéance", text="Echéance")
 
         # Ajout des données au tableau
-        #self.add_data_to_table()
-        self.refresh_data_table()
+        self.add_data_to_table()
+        #self.transform_data()
+        
+        
 
         # Affichage du tableau
         self.tree.grid(row=0, column=0, sticky="nsew")
@@ -199,43 +203,23 @@ class Application :
         
 
     def add_data_to_table(self):
-        Article = "Peluche 1"
-        OF = "45785"
-        QAP = 5000
-        QDP = self.AjoutProd.get()
-        QDP2 = (QDP + self.AjoutProd.get())
-        DATE = "05/01/2024"
+        data = []
+        for mo_dico in mo_list:
+            Article = mo_dico['product_id']
+            OF = mo_dico['name']
+            QAP = mo_dico['product_qty']
+            QDP = self.AjoutProd.get()
+            DATE = mo_dico['date_planned_start']
+            ligne = (Article, OF,(QDP,"/",QAP), DATE)
+            data.append(ligne)
 
         # Efface toutes les lignes actuelles du tableau
         for item in self.tree.get_children():
            self.tree.delete(item)
 
-        # Ajoutez vos données au tableau
-        #data = [
-        #    (Article, OF,(QDP,"/",QAP), DATE),
-        #    (Article, OF,((QDP2),"/",QAP), DATE),]
-        data = self.transform_data(mo_list)
-        for item in data:
-            self.tree.insert("", "end", values=item)
-
-    def refresh_data_table(self):
-        pass
-
-    def transform_data(input_data):
-        transformed_data = []
-    
-        for item in input_data:
-            article = item['product_id'][1]
-            of = item['name']
-            qdp = item['qty_producing']
-            qap = item['product_qty']
-            date = item['date_planned_start']
-
-            data_item = (article, of, (qdp, "/", qap), date)
-            transformed_data.append(data_item)
-
-        return transformed_data
-
+        for item1 in data:
+            self.tree.insert("", "end", values=item1)
+   
     def validate_entry(self): 
          # Fonction appelée lors de la validation du bouton
          self.add_data_to_table()
@@ -243,7 +227,6 @@ class Application :
          # Efface la saisie AjoutProd après la validation
          self.AjoutProd.delete(0, 'end')
     
-
 
 if __name__ == "__main__":
 
