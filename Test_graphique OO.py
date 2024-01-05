@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import xmlrpc.client
-
+#=====PROGRAMME DE CONNECTION A ODOO=====
 class IF_ErpOdoo:
     "Classe objet d'interface de l'ERP Odoo en XML-RPC"
     def __init__(self, erp_ipaddr, erp_port, erp_db, erp_user, erp_pwd):
@@ -143,7 +143,7 @@ class Connection:
 #=====PAGE D'APPLICATION=====
 class Application : 
     
-#=====CREATION DE LA PAGE APPLICATION===== 
+     #=====CREATION DE LA PAGE APPLICATION===== 
     def __init__(self, prod_page, user_name):
         self.production = prod_page
         self.production.title("Application Production")
@@ -159,7 +159,7 @@ class Application :
 
         
 
-#===== TABLEAU PRODUITS =====
+     #===== TABLEAU PRODUITS =====
     def create_widgets(self):
         # Création du Treeview (tableau)
         self.tree = ttk.Treeview(self.production, columns=("Nom", "N° OF", "Quantité à produire", "Echéance"))
@@ -188,7 +188,7 @@ class Application :
         # Suppression de la colonne d'ID
         self.tree.column("#0", width=0, stretch=tk.NO)
 
-#===== SAISIE DE L'AJOUT DE PRODUCTION=====
+     #===== SAISIE DE L'AJOUT DE PRODUCTION=====
         # Ajout du label sous le tableau
         prod_label = tk.Label(self.production, text="Ajouter une production")
         prod_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
@@ -201,7 +201,7 @@ class Application :
         validate_button = tk.Button(self.production, text="Valider", command=self.validate_entry)
         validate_button.grid(row=3, column=0, sticky="nsew", padx=5, pady=5)
         
-
+     #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
     def add_data_to_table(self):
         data = []
         for mo_dico in mo_list:
@@ -213,13 +213,14 @@ class Application :
             ligne = (Article, OF,(QDP,"/",QAP), DATE)
             data.append(ligne)
 
-        # Efface toutes les lignes actuelles du tableau
+         # Efface toutes les lignes actuelles du tableau
         for item in self.tree.get_children():
            self.tree.delete(item)
-
+         #Apres avoir effacé on re - affiche le tableau modifié 
         for item1 in data:
             self.tree.insert("", "end", values=item1)
-   
+
+     #=====BOUTON DE VALIDATION SAISIE PROD=====
     def validate_entry(self): 
          # Fonction appelée lors de la validation du bouton
          self.add_data_to_table()
@@ -227,7 +228,7 @@ class Application :
          # Efface la saisie AjoutProd après la validation
          self.AjoutProd.delete(0, 'end')
     
-
+#=====MAIN=====
 if __name__ == "__main__":
 
     ifOdoo = IF_ErpOdoo("172.31.10.171", "8069","amaDB", "vente", "ventepython2024")
