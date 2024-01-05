@@ -23,20 +23,30 @@ class IF_ErpOdoo:
         self.mErpUser = erp_user
         self.mErpPwd = erp_pwd
         self.mModels = None
+        self.mOdooVersion = 'Inconnue'
+        self.mListFields = []
+    
+    def init(self):
+        self.mModels = None
+        self.mOdooVersion = 'Inconnue'
+        self.mListFields = []
+
     def __del__(self):
         
         "Methode Constructeur de Classe"
         print("##IF_ErpOdoo Destructor##")
 
     def connect(self):
-        "Methode de connexion à l'ERP Odoo"
+        """Methode de connexion à l'ERP Odoo"""
         erp_url = f'http://{self.mErpIpAddr}:{self.mErpIpPort}'
         print("Connexion ODOO")
         print(f"@URL={erp_url}")
+        self.init()
         try:
             common = xmlrpc.client.ServerProxy('{}/xmlrpc/2/common'.format(erp_url))
             version = common.version()
-            print(f"Odoo version={version['server_serie']}")
+            self.mOdooVersion = version['server_serie']
+            print(f"Odoo version={self.mOdooVersion}")
         except ConnectionRefusedError:
             print("Odoo Server not found or connection rejected")
         else:
@@ -50,13 +60,25 @@ class IF_ErpOdoo:
             print(f"Manufactoring Order write access rights : {access}")
         else:
             print(f'Odoo Server authentification rejected : DB={self.mErpDB} User={self.mErpUser}')
+    
+    def setServer(self, erp_ipaddr, erp_port):
+        self.mErpIpAddr = erp_ipaddr
+        self.mErpIpPort = erp_port
+        self.connect()
 
-    def getFields(self):
+    def getFields(self, base='mrp.production'):
         if(self.mModels!=None):
             listing = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
-                'mrp.production', 'fields_get',
+                base, 'fields_get',
                 [], {'attributes': []})
+            self.mListFields.clear()
         for attr in listing:
+            self.mListFields.append(attr)
+            nb_attr = len(self.mListFields)
+            print(f'*** {base} [{nb_attr}]***')
+    
+    def printFields(self):
+        for attr in self.mListFields:
             print(f' - {attr}')
 
     def getManufOrderToDo(self):
@@ -74,10 +96,10 @@ class IF_ErpOdoo:
 
     def getArticle(self):
         if self.mModels is not None:
-            fields = ['product_id', 'qty_producing']
+            fields = ['display_name','qty_available']
             limit = 100
             mo_list = self.mModels.execute_kw(self.mErpDB,self.mUser_id,self.mErpPwd,
-                'mrp.production','search_read',
+                'product.product','search_read',
                 [],
                 {'fields': fields, 'limit': limit})
             for mo_dico in mo_list:
@@ -91,5 +113,14 @@ class IF_ErpOdoo:
 if __name__ == "__main__":
     ifOdoo = IF_ErpOdoo("172.31.10.171", "8069","amaDB", "vente", "ventepython2024")
     ifOdoo.connect()
-    ifOdoo.getFields()
+    print(f'=> Version : {ifOdoo.mOdooVersion}')
+    ifOdoo.setServer("172.31.10.171", "8069")
+    ifOdoo.connect()
+    print(f'=> Version : {ifOdoo.mOdooVersion}')
+
+    ifOdoo.getFields('product.product')
+    print(ifOdoo.mListFields)
+    
+    #ifOdoo.getFields()
+    #ifOdoo.printFields()
     ifOdoo.getArticle()
