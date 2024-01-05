@@ -6,20 +6,19 @@ class Connection:
     def __init__(self, connection_page):
         self.ID = connection_page
         self.ID.title("Connection")
-        self.ID.geometry("200x150+850+300")
-
+        self.ID.geometry("200x200+850+300")
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
 
     def create_widgets(self):
         #===== USER =====
-        # Création d'une étiquette
         user_label = tk.Label(self.ID, text="User : ")
         user_label.pack()
 
-        # Création d'une zone de saisie
-        self.user_entry = tk.Entry(self.ID)
+        # Création d'une zone de saisie 
+        self.user_var = tk.StringVar()
+        self.user_entry = ttk.Entry(self.ID, textvariable=self.user_var)
         self.user_entry.pack()
 
         #===== PASSWORD =====
@@ -28,28 +27,31 @@ class Connection:
         password_label.pack()
 
         # Création d'une zone de saisie
-        self.password_entry = tk.Entry(self.ID, show='*')
+        self.password_var = tk.StringVar()
+        self.password_entry = ttk.Entry(self.ID, textvariable=self.password_var, show='*')
         self.password_entry.pack()
 
         # Lier l'événement de pression de la touche Entrée à la fonction Validation
         self.password_entry.bind("<Return>", self.validation)
 
     def validation(self, event):
-        user_name = self.user_entry.get()
-        password = self.password_entry.get()
+        user_name = self.user_var.get()
+        password = self.password_var.get()
 
-        # Vérification des identifiants
-        code = (user_name.lower() == "a" and password.lower() == "s") or \
-               (user_name.lower() == "a" and password.lower() == "c") or \
-               (user_name.lower() == "m" and password.lower() == "m")
+        # Vérification des identifiants Odoo
+        # Replace la vérification des identifiants
+        odoo_credentials_valid = True
 
-        if code:
+        if odoo_credentials_valid:
             # Fermeture auto de la fenêtre de connexion
             self.ID.destroy()
 
-            # Affichage de l'application 
+            # Affichage de l'application
             print("affichage page PROD")
-            
+
+            # Utiliser les identifiants Odoo (user_name, password) ici
+            print("User:", user_name)
+            print("Password:", password)
         else:
             # Création d'une fenêtre d'erreur
             error_window = tk.Toplevel(self.ID)
@@ -61,10 +63,10 @@ class Connection:
             error_label.pack()
 
             # Effacement des champs de saisie
-            self.user_entry.delete(0, "end")
-            self.password_entry.delete(0, "end")
+            self.user_var.set("")
+            self.password_var.set("")
 
 if __name__ == "__main__":
     connection_page = tk.Tk()
     connection_app = Connection(connection_page)
-    connection_page.mainloop() 
+    connection_page.mainloop()
