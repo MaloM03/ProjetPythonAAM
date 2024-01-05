@@ -25,6 +25,7 @@ class IF_ErpOdoo:
         self.mModels = None
         self.mOdooVersion = 'Inconnue'
         self.mListFields = []
+
         self.mErpUser = input("Entrez votre identifiant Odoo : ")
         self.mErpPwd = input("Entrez votre mot de passe Odoo : ")
 
