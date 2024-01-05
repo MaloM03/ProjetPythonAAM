@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import xmlrpc.client
 
-#=====PROGRAMME DE CONNECTION A ODOO=====
+#=====PROGRAMME DE CONNECTION A ODOO====
 class IF_ErpOdoo:
     "Classe objet d'interface de l'ERP Odoo en XML-RPC"
     def __init__(self, erp_ipaddr, erp_port, erp_db, erp_user, erp_pwd):
