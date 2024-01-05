@@ -250,6 +250,119 @@ class Application :
          # Efface la saisie AjoutProd après la validation
          self.AjoutProd.delete(0, 'end')
     
+class MaFenetre(tk.Tk):
+    def __init__(self):
+        super().__init__()
+
+        self.title("Exemple de Fenêtre")
+        self.geometry("600x400")
+
+        # Création du Treeview (tableau)
+        #self.tree = ttk.Treeview(self, columns=("Nom", "Chiffre"), show="headings")
+        self.create_widgets()
+        self.entry_test_chiffre = tk.Entry(self)
+
+        # Configuration des colonnes
+        #self.tree.heading("Nom", text="Nom")
+        #self.tree.heading("Chiffre", text="Chiffre")
+
+        # Ajout des données au tableau
+        #for i in range(1, 11):
+        #    self.tree.insert("", "end", values=(f"Nom {i}", f"Chiffre {i}"))
+
+        # Lier l'événement de sélection à la fonction
+        #self.tree.bind("<ButtonRelease-1>", self.selection_ligne_tableau)
+
+        # Affichage du tableau
+        self.tree.pack(pady=10)
+
+        # Label "test chiffre"
+        self.label_test_chiffre = tk.Label(self, text="Test Chiffre", font=("Arial", 10, "bold"))
+        # Zone de saisie
+        self.entry_test_chiffre = tk.Entry(self)
+        # Bouton de validation
+        self.button_valider_test_chiffre = tk.Button(self, text="Valider", command=self.valider_saisie_test_chiffre)
+        # Label "invalide"
+        self.label_invalide = tk.Label(self, text="Invalide", fg="red")
+    
+    #===== TABLEAU PRODUITS =====
+    def create_widgets(self):
+        # Création du Treeview (tableau)
+        self.tree = ttk.Treeview(self, columns=("Nom", "N° OF", "Quantité à produire", "Echéance"))
+
+        # Configuration des colonnes
+        
+        self.tree.heading("Nom", text="Nom")
+        self.tree.heading("N° OF", text="N° OF")
+        self.tree.heading("Quantité à produire", text="Quantité à produire")
+        self.tree.heading("Echéance", text="Echéance")
+
+        # Ajout des données au tableau
+        self.add_data_to_table()
+        #self.transform_data()
+        
+        
+
+        # Affichage du tableau
+        self.tree.grid(row=0, column=0, sticky="nsew")
+        
+
+        # Configuration du redimensionnement de la fenêtre
+        self.grid_rowconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=1)
+
+        # Suppression de la colonne d'ID
+        self.tree.column("#0", width=0, stretch=tk.NO)
+    
+    #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
+    def add_data_to_table(self):
+        data = []
+        for mo_dico in mo_list:
+            Article = mo_dico['product_id']
+            OF = mo_dico['name']
+            QAP = mo_dico['product_qty']
+            #QDP = self.entry_test_chiffre.get()
+            DATE = mo_dico['date_planned_start']
+            #ligne = (Article, OF,(QDP,"/",QAP), DATE)
+            #data.append(ligne)
+
+         # Efface toutes les lignes actuelles du tableau
+        for item in self.tree.get_children():
+           self.tree.delete(item)
+         #Apres avoir effacé on re - affiche le tableau modifié 
+        for item1 in data:
+            self.tree.insert("", "end", values=item1)
+
+    '''def selection_ligne_tableau(self, event):
+        # Récupérer la ligne sélectionnée
+        selected_item = self.tree.selection()
+        if selected_item:
+            # Afficher le label "test chiffre" et la zone de saisie
+            self.label_test_chiffre.pack(pady=5)
+            self.entry_test_chiffre.pack(pady=5)
+            self.button_valider_test_chiffre.pack(pady=5)
+            # Masquer le label "invalide"
+            self.label_invalide.pack_forget()'''
+
+    def valider_saisie_test_chiffre(self):
+        # Récupérer la valeur de la zone de saisie
+        valeur_saisie = self.entry_test_chiffre.get()
+
+        # Vérifier si la valeur saisie est un nombre
+        try:
+            float(valeur_saisie)
+        except ValueError:
+            # Afficher le label "invalide" si ce n'est pas un nombre
+            self.label_invalide.pack(pady=5)
+            return
+
+        # Récupérer la ligne sélectionnée
+        selected_item = self.tree.selection()
+        if selected_item:
+            # Mettre à jour la valeur dans la colonne "Chiffre" de la ligne sélectionnée
+            self.tree.item(selected_item, values=(self.tree.item(selected_item, "values")[0], valeur_saisie))
+            # Cacher le label "invalide" si la mise à jour réussit
+            self.label_invalide.pack_forget()
 #=====MAIN=====
 if __name__ == "__main__":
 
@@ -277,6 +390,8 @@ if __name__ == "__main__":
     prod_app= Application(prod_page,connection_page)
 
     # Lancement de l'application
+    app = MaFenetre()
+    app.mainloop()
     connection_page.mainloop()
 
 
