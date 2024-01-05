@@ -16,8 +16,8 @@ class IF_ErpOdoo:
         self.mModels = None
         self.mOdooVersion = 'Inconnue'
         self.mListFields = []
-        self.mErpUser = input("Entrez votre identifiant Odoo : ")
-        self.mErpPwd = input("Entrez votre mot de passe Odoo : ")
+        #self.mErpUser = input("Entrez votre identifiant Odoo : ")
+        #self.mErpPwd = input("Entrez votre mot de passe Odoo : ")
     
     def init(self):
         self.mModels = None
@@ -260,31 +260,27 @@ class MaFenetre(tk.Tk):
        
         # Définir la taille initiale de la fenêtre
         self.geometry("800x300+750+300")
+        
 
         # Création du Treeview (tableau)
         self.entry_test_chiffre = tk.Entry(self)
         self.create_widgets()
-    
-        '''# Label "test chiffre"
-        self.label_test_chiffre = tk.Label(self, text="Test Chiffre", font=("Arial", 10, "bold"))
-        # Zone de saisie
-        self.entry_test_chiffre = tk.Entry(self)
-        # Bouton de validation
-        #self.button_valider_test_chiffre = tk.Button(self, text="Valider", command=self.valider_saisie_test_chiffre)
-        # Label "invalide"
-        self.label_invalide = tk.Label(self, text="Invalide", fg="red")'''
-
+        
         # Ajout du label sous le tableau
-        self_label = tk.Label(self, text="Ajouter une production")
-        self_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
+        self.label = tk.Label(self, text="Ajouter une production")
+        self.label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
 
         # Ajout de la zone de saisie sous le label
         self.entry_test_chiffre = tk.Entry(self)
         self.entry_test_chiffre.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
 
         # Ajout du bouton de validation
-        self.button_valider_test_chiffre = tk.Button(self, text="Valider", command=self.valider_saisie_test_chiffre)
+        self.button_valider_test_chiffre = tk.Button(self, text="Valider", command=self.validate_entry)
         self.button_valider_test_chiffre.grid(row=3, column=0, sticky="nsew", padx=5, pady=5)
+
+        # Ajout du label d'erreur syntaxe
+        self.label_invalide = tk.Label(self, text="Invalide", fg="red")
+        self.label_invalide.grid(row=4, column=0, sticky="w", padx=5, pady=5)
     
     #===== TABLEAU PRODUITS =====
     def create_widgets(self):
@@ -297,16 +293,17 @@ class MaFenetre(tk.Tk):
         self.tree.heading("N° OF", text="N° OF")
         self.tree.heading("Quantité à produire", text="Quantité à produire")
         self.tree.heading("Echéance", text="Echéance")
+        
+        # Lier l'événement de sélection à la fonction
+        self.tree.bind("<ButtonRelease-1>", self.selection_ligne_tableau)
 
         # Ajout des données au tableau
         self.add_data_to_table()
         #self.transform_data()
         
-    
         # Affichage du tableau
         self.tree.grid(row=0, column=0, sticky="nsew")
-        
-
+    
         # Configuration du redimensionnement de la fenêtre
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
@@ -340,19 +337,19 @@ class MaFenetre(tk.Tk):
         selected_item = self.tree.selection()
         if selected_item:
             # Afficher le label "test chiffre" et la zone de saisie
-            self.label_test_chiffre.pack(pady=5)
+            self.label.pack(pady=5)
             self.entry_test_chiffre.pack(pady=5)
             self.button_valider_test_chiffre.pack(pady=5)
             # Masquer le label "invalide"
             self.label_invalide.pack_forget()
     
-    '''#=====BOUTON DE VALIDATION SAISIE PROD=====
+    #=====BOUTON DE VALIDATION SAISIE PROD=====
     def validate_entry(self): 
          # Fonction appelée lors de la validation du bouton
          self.add_data_to_table()
 
          # Efface la saisie AjoutProd après la validation
-         self.AjoutProd.delete(0, 'end')'''
+         self.AjoutProd.delete(0, 'end')
 
     def valider_saisie_test_chiffre(self):
         # Récupérer la valeur de la zone de saisie
@@ -373,6 +370,8 @@ class MaFenetre(tk.Tk):
             self.tree.item(selected_item, values=(self.tree.item(selected_item, "values")[0], valeur_saisie))
             # Cacher le label "invalide" si la mise à jour réussit
             self.label_invalide.pack_forget()
+            # Efface la saisie AjoutProd après la validation
+            self.entry_test_chiffre.delete(0, 'end')
 
 
 
