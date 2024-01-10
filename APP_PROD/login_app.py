@@ -4,7 +4,8 @@ import xmlrpc.client
 from odoo import *
 
 class Connection:
-    def __init__(self, connection_page, prod_page):
+    def __init__(self, connection_page, prod_page, prod_app):
+        self.prod_app = prod_app
         self.prod_page = prod_page
         self.ID = connection_page
         self.ID.title("Connection App Prod")
@@ -48,6 +49,9 @@ class Connection:
             # Affichage de l'application 
             print("affichage page PROD")
             self.prod_page.deiconify()
+            ifOdoo.getFields()
+            ifOdoo.getManufOrderToDo()
+            self.prod_app.add_data_to_table()
             
         else:
             # Création d'une fenêtre d'erreur

@@ -18,7 +18,6 @@ class Application :
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
-
         
 
      #===== TABLEAU PRODUITS =====

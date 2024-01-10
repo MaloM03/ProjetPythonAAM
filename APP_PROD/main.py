@@ -11,8 +11,9 @@ if __name__ == "__main__":
     # Création de la fenêtre principale + mettre invisible
     prod_page = tk.Tk()
     prod_page.withdraw()
-    connection_app = Connection(connection_page,prod_page) 
     prod_app = Application(prod_page,connection_page)
+    connection_app = Connection(connection_page,prod_page, prod_app) 
+    
     
     # Loop des fenetres
     connection_page.mainloop()
