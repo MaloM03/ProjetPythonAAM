@@ -387,18 +387,16 @@ class MaFenetre(tk.Tk):
 #=====MAIN=====
 if __name__ == "__main__":
 
-    ifOdoo = IF_ErpOdoo("172.31.10.171", "8069","amaDB", "vente", "ventepython2024")
+    ifOdoo = IF_ErpOdoo("172.31.10.171", "8069","amaDB", "ventee", "ventepython2024")
     ifOdoo.connect()
     print(f'=> Version : {ifOdoo.mOdooVersion}')
-    ifOdoo.setServer("172.31.10.171", "8069")
-    ifOdoo.connect()
-    print(f'=> Version : {ifOdoo.mOdooVersion}')
+    #ifOdoo.setServer("172.31.10.171", "8069")
+    #ifOdoo.connect()
+    #print(f'=> Version : {ifOdoo.mOdooVersion}')
 
-    ifOdoo.getFields()
-    ifOdoo.getManufOrderToDo()
-    #print(mo_list)
-    #print(Application.transform_data(mo_list))
-
+    #ifOdoo.getFields()
+    #ifOdoo.getManufOrderToDo()
+    
     # Création de la fenêtre principale
     prod_page = tk.Tk()
     prod_page.withdraw()

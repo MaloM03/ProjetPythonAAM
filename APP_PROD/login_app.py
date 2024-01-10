@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import xmlrpc.client
+from odoo import *
 
 class Connection:
     def __init__(self, connection_page):
@@ -38,12 +39,8 @@ class Connection:
         user_name = self.user_entry.get()
         password = self.password_entry.get()
 
-        # Vérification des identifiants
-        code = (user_name.lower() == "a" and password.lower() == "s") or \
-               (user_name.lower() == "a" and password.lower() == "c") or \
-               (user_name.lower() == "m" and password.lower() == "m")
-
-        if code:
+        ifOdoo = IF_ErpOdoo("172.31.10.171", "8069","amaDB", user_name, password)
+        if ifOdoo.connect():
             # Fermeture auto de la fenêtre de connexion
             self.ID.destroy()
 
@@ -63,8 +60,3 @@ class Connection:
             # Effacement des champs de saisie
             self.user_entry.delete(0, "end")
             self.password_entry.delete(0, "end")
-
-if __name__ == "__main__":
-    connection_page = tk.Tk()
-    connection_app = Connection(connection_page)
-    connection_page.mainloop() 
