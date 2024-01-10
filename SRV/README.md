@@ -79,3 +79,8 @@ Valider puis attendre l'instalation des deux conteneurs odoo et base de données
 ```bash
 http://0.0.0.0:8069
 ```
+
+## Mettre un contonneur en démarrage automatique dès le lancement de docker
+Exemple pour portainer
+```bash
+sudo docker update --restart=always portainer
