@@ -250,13 +250,29 @@ class Application :
         for item1 in data:
             self.tree.insert("", "end", values=item1)
 
-     #=====BOUTON DE VALIDATION SAISIE PROD=====
+     #=====BOUTON DE VALIDATION SAISIE STOK=====
     def validate_entry(self): 
+         prod_labelerror = tk.Label(self.logistique, text="Saisie invalide")
+         prod_labelerror.config(fg="red")
+         prod_labelerror.grid(row=1, column=0, sticky="n", padx=5, pady=5)
+         ModifStok = self.AjoutProd.get()
+         if ModifStok.isdigit():
          # Fonction appelée lors de la validation du bouton
-         self.add_data_to_table()
+          self.add_data_to_table()
 
          # Efface la saisie AjoutProd après la validation
-         self.AjoutProd.delete(0, 'end')
+          self.AjoutProd.delete(0, 'end')
+
+          #Efface l'erreur de saisie 
+          prod_labelerror.grid_remove() 
+         else: 
+          prod_labelerror.grid()
+           
+
+            # Efface la saisie AjoutProd après la validation
+          self.AjoutProd.delete(0, 'end')
+             
+             
 
 if __name__ == "__main__":
     # Création de la fenêtre de connection

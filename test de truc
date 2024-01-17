@@ -1,0 +1,31 @@
+import tkinter as tk
+
+def gerer_visibilite_label():
+    entree_utilisateur = entree.get()
+
+    # Vérifier si l'entrée utilisateur est un chiffre
+    if entree_utilisateur.isdigit():
+        label1.grid_remove()  # Cacher le label
+    else:
+        label1.grid()  # Afficher le label
+
+# Créer une fenêtre Tkinter
+fenetre = tk.Tk()
+fenetre.title("Afficher ou cacher un label en fonction de l'entrée utilisateur")
+
+# Créer une zone de saisie (entry) pour l'entrée utilisateur
+entree = tk.Entry(fenetre)
+entree.grid(row=0, column=0)
+
+# Créer un label à afficher ou cacher
+label1 = tk.Label(fenetre, text="Label à afficher ou cacher")
+
+# Placer le label dans le tableau (grid)
+label1.grid(row=1, column=0)
+
+# Bouton pour changer la visibilité du label
+bouton_visibilite = tk.Button(fenetre, text="Changer Visibilité", command=gerer_visibilite_label)
+bouton_visibilite.grid(row=2, column=0)
+
+# Démarrer la boucle principale Tkinter
+fenetre.mainloop()
