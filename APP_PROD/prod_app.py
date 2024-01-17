@@ -33,7 +33,7 @@ class Application :
         self.tree.heading("Echéance", text="Echéance")
 
         # Ajout des données au tableau
-        self.add_data_to_table()
+        #self.add_data_to_table()
         #self.transform_data()
         
         
@@ -63,10 +63,9 @@ class Application :
         validate_button.grid(row=3, column=0, sticky="nsew", padx=5, pady=5)
         
      #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
-    def add_data_to_table(self):
+    def add_data_to_table(self, OdooData):
         data = []
-        mo_list = [] # rajouter chelou
-        for mo_dico in mo_list:
+        for mo_dico in OdooData :
             Article = mo_dico['product_id']
             OF = mo_dico['name']
             QAP = mo_dico['product_qty']

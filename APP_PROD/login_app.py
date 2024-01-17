@@ -50,8 +50,9 @@ class Connection:
             print("affichage page PROD")
             self.prod_page.deiconify()
             ifOdoo.getFields()
-            ifOdoo.getManufOrderToDo()
-            self.prod_app.add_data_to_table()
+            data = []
+            data = ifOdoo.getManufOrderToDo()
+            self.prod_app.add_data_to_table(data)
             
         else:
             # Création d'une fenêtre d'erreur
