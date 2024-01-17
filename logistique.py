@@ -174,7 +174,7 @@ class Application :
      #=====CREATION DE LA PAGE APPLICATION===== 
     def __init__(self, log_page, user_name):
         self.logistique = log_page
-        self.logistique.title("Application Production")
+        self.logistique.title("Application Logistique")
        
         # Définir la taille initiale de la fenêtre
         self.logistique.geometry("1000x300+500+300")
@@ -219,7 +219,7 @@ class Application :
 
      #===== SAISIE DE L'AJOUT DE PRODUCTION=====
         # Ajout du label sous le tableau
-        prod_label = tk.Label(self.logistique, text="Ajouter une production")
+        prod_label = tk.Label(self.logistique, text="Modifié stok")
         prod_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
 
         # Ajout de la zone de saisie sous le label
