@@ -177,7 +177,7 @@ class Application :
         self.logistique.title("Application Production")
        
         # Définir la taille initiale de la fenêtre
-        self.logistique.geometry("800x300+750+300")
+        self.logistique.geometry("1000x300+500+300")
 
         self.AjoutProd = tk.Entry(self.logistique)
         
@@ -189,14 +189,16 @@ class Application :
      #===== TABLEAU PRODUITS =====
     def create_widgets(self):
         # Création du Treeview (tableau)
-        self.tree = ttk.Treeview(self.logistique, columns=("Nom", "N° OF", "Quantité à produire", "Echéance"))
+        self.tree = ttk.Treeview(self.logistique, columns=("Nom", "Quantité de stok", "Prix àl'unité", "Image de ref", "Code article"))
 
         # Configuration des colonnes
         
         self.tree.heading("Nom", text="Nom")
-        self.tree.heading("N° OF", text="N° OF")
-        self.tree.heading("Quantité à produire", text="Quantité à produire")
-        self.tree.heading("Echéance", text="Echéance")
+        self.tree.heading("Quantité de stok", text="Quantité de stok")
+        self.tree.heading("Prix àl'unité", text="Prix àl'unité")
+        self.tree.heading("Image de ref", text="Image de ref")
+        self.tree.heading("Code article", text="Code article")
+
 
         # Ajout des données au tableau
         self.add_data_to_table()
