@@ -40,7 +40,11 @@ class Connection:
     def validation(self, event):
         user_name = self.user_entry.get()
         password = self.password_entry.get()
+<<<<<<< HEAD
+       
+=======
 
+>>>>>>> fda3a7f0924dd5ba8fa1082377e149552abeb11f
         ifOdoo = IF_ErpOdoo("172.31.10.188", "8069","amaDB", user_name, password)
         if ifOdoo.connect():
             # Fermeture auto de la fenêtre de connexion
