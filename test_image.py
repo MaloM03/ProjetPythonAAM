@@ -1,5 +1,34 @@
 import xmlrpc.client
+import base64
+from io import BytesIO
+from PIL import Image
+from PIL import ImageTk
+import tkinter as tk
 
+#commande a faire pour upgrade pillow
+# pip install --upgrade Pillow
+
+def display_image_in_tkinter(encoded_string):
+    # Décode la chaîne base64
+    decoded_bytes = base64.b64decode(encoded_string)
+
+    # Crée une image à partir des données décodées
+    image = Image.open(BytesIO(decoded_bytes))
+
+    # Crée une fenêtre Tkinter
+    root = tk.Tk()
+    root.title("Image Decoding")
+
+    # Convertit l'image en format Tkinter
+    tk_image = ImageTk.PhotoImage(image)
+
+    # Crée un widget Label pour afficher l'image
+    label = tk.Label(root, image=tk_image)
+    label.pack()
+
+    # Lance la boucle principale Tkinter
+    root.mainloop()
+    
 #=====PROGRAMME DE CONNECTION A ODOO====
 class IF_ErpOdoo:
     "Classe objet d'interface de l'ERP Odoo en XML-RPC"
@@ -114,6 +143,7 @@ class IF_ErpOdoo:
                 {'fields': fields, 'limit': limit})
             for mo_dico in mo_list:
                 print(f'----------------------------')
+                display_image_in_tkinter(mo_dico['image_1920'])
                 for k in mo_dico.keys():
                     print(f' - {k} : {mo_dico[k]}')
 
@@ -123,5 +153,3 @@ if __name__ == "__main__":
         ifOdoo.getFields()
         data = []
         data = ifOdoo.getImage()
-
-
