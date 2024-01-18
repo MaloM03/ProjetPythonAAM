@@ -23,6 +23,7 @@ def display_resized_image_in_tkinter(encoded_string, width=128, height=128):
     root.title("Resized Image Decoding")
 
     # Convertit l'image redimensionnée en format Tkinter
+    global tk_image
     tk_image = ImageTk.PhotoImage(resized_image)
 
     # Crée un widget Label pour afficher l'image
@@ -137,7 +138,7 @@ class IF_ErpOdoo:
 
     def getImage(self):
         if self.mModels is not None:
-            fields = ['name','list_price','image_1920']
+            fields = ['image_1920','list_price']
             limit = 100
             global mo_list
             mo_list = self.mModels.execute_kw(self.mErpDB,self.mUser_id,self.mErpPwd,
@@ -146,9 +147,27 @@ class IF_ErpOdoo:
                 {'fields': fields, 'limit': limit})
             for mo_dico in mo_list:
                 print(f'----------------------------')
-                #display_resized_image_in_tkinter(mo_dico['image_1920'])
+                display_resized_image_in_tkinter(mo_dico['image_1920'])
                 for k in mo_dico.keys():
                     print(f' - {k} : {mo_dico[k]}')
+                    print(mo_dico[k])
+                    if mo_dico[k] ==  1 :
+                        Image1 = tk_image
+                        print(f'----------------------------')
+                        print("ok c'est bon")
+                    if mo_dico[k] ==  2 :
+                        Image2 = tk_image
+                        print(f'----------------------------')
+                        print("ok c'est bon 2")
+                    if mo_dico[k] ==  3 :
+                        Image3 = tk_image
+                        print(f'----------------------------')
+                        print("ok c'est bon 3")
+                    if mo_dico[k] ==  4 :
+                        Image4 = tk_image
+                        print(f'----------------------------')
+                        print("ok c'est bon 4")
+
 
 if __name__ == "__main__":
     ifOdoo = IF_ErpOdoo("172.31.10.188", "8069","amaDB", "admin", "adminpython2024")
