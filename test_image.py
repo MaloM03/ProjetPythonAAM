@@ -5,8 +5,8 @@ from PIL import Image
 from PIL import ImageTk
 import tkinter as tk
 
-#commande a faire pour upgrade pillow
-# pip install --upgrade Pillow
+#commande a faire pour upgrade pillow 
+ #pip install --upgrade Pillow
 
 def display_resized_image_in_tkinter(encoded_string, width=128, height=128):
     # Décode la chaîne base64
@@ -146,7 +146,7 @@ class IF_ErpOdoo:
                 {'fields': fields, 'limit': limit})
             for mo_dico in mo_list:
                 print(f'----------------------------')
-                display_resized_image_in_tkinter(mo_dico['image_1920'])
+                #display_resized_image_in_tkinter(mo_dico['image_1920'])
                 for k in mo_dico.keys():
                     print(f' - {k} : {mo_dico[k]}')
 

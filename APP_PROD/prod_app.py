@@ -66,12 +66,13 @@ class Application :
     def add_data_to_table(self, OdooData):
         data = []
         for mo_dico in OdooData :
+            
             Article = mo_dico['product_id']
             OF = mo_dico['name']
             QAP = mo_dico['product_qty']
-            QDP = self.AjoutProd.get()
+            QDP = mo_dico['qty_producing']
             DATE = mo_dico['date_planned_start']
-            ligne = (Article, OF,(QDP,"/",QAP), DATE)
+            ligne = (Article, OF,(QDP, "/" ,QAP), DATE)
             data.append(ligne)
 
          # Efface toutes les lignes actuelles du tableau
@@ -88,3 +89,4 @@ class Application :
 
          # Efface la saisie AjoutProd après la validation
          self.AjoutProd.delete(0, 'end')
+         
