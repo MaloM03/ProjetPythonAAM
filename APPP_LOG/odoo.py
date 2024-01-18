@@ -103,3 +103,21 @@ class IF_ErpOdoo:
                 for k in mo_dico.keys():
                     print(f' - {k} : {mo_dico[k]}')
             return mo_list
+
+    def getImage(self):
+        if self.mModels is not None:
+            fields = ['name','list_price','image_1920']
+            limit = 100
+            global mo_list
+            mo_list = self.mModels.execute_kw(self.mErpDB,self.mUser_id,self.mErpPwd,
+                'product.template','search_read',
+                [],
+                {'fields': fields, 'limit': limit})
+            for mo_dico in mo_list:
+                print(f'----------------------------')
+                #display_resized_image_in_tkinter(mo_dico['image_1920'])
+                for k in mo_dico.keys():
+                    print(f' - {k} : {mo_dico[k]}')
+
+            return mo_list
+
