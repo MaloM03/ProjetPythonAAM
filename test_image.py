@@ -146,7 +146,7 @@ class IF_ErpOdoo:
                 {'fields': fields, 'limit': limit})
             for mo_dico in mo_list:
                 print(f'----------------------------')
-                #display_resized_image_in_tkinter(mo_dico['image_1920'])
+                display_resized_image_in_tkinter(mo_dico['image_1920'])
                 for k in mo_dico.keys():
                     print(f' - {k} : {mo_dico[k]}')
 

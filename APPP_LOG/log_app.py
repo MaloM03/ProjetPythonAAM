@@ -77,16 +77,31 @@ class Application :
       refresh_BP.grid(row=4, column=0, sticky="w", padx=5, pady=5)
         
      #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
-   def add_data_to_table(self, OdooData):
+   def add_data_to_table(self, dataA, dataB):
       data = []
-      for mo_dico in OdooData :
+
+      for mo_dico in dataA :
          Article = mo_dico['display_name']
          OF = mo_dico['qty_available']
-         QAP = 2 #mo_dico['product_qty']
-         QDP = 2 #mo_dico['qty_producing']
+         QAP = " €" #mo_dico['product_qty']
+         QDP = 0
          DATE = 2 #mo_dico['date_planned_start']
          ligne = (Article, OF,(QDP, "/" ,QAP), DATE)
          data.append(ligne)
+      
+      i=0
+
+      for mo_dico in dataB :
+         article, of, (qdp, _, qap), date = data[i]
+         
+         # Modifier les données spécifiques
+         #article = "NewArticle" + str(i)
+         qdp = mo_dico['list_price']
+         #qap = "NewQAP" + str(i)
+         
+         # Mettre à jour la liste
+         data[i] = (article, of, (qdp, qap), date)
+         i = i + 1
 
          # Efface toutes les lignes actuelles du tableau
          for item in self.tree.get_children():
@@ -94,21 +109,6 @@ class Application :
          #Apres avoir effacé on re - affiche le tableau modifié 
          for item1 in data:
             self.tree.insert("", "end", values=item1)
-   def getImage(self):
-        if self.mModels is not None:
-            fields = ['name','list_price','image_1920']
-            limit = 100
-            global mo_list
-            mo_list = self.mModels.execute_kw(self.mErpDB,self.mUser_id,self.mErpPwd,
-                'product.template','search_read',
-                [],
-                {'fields': fields, 'limit': limit})
-            for mo_dico in mo_list:
-                print(f'----------------------------')
-                #display_resized_image_in_tkinter(mo_dico['image_1920'])
-                for k in mo_dico.keys():
-                    print(f' - {k} : {mo_dico[k]}')
-
 
      #=====BOUTON DE VALIDATION SAISIE STOK=====
             
