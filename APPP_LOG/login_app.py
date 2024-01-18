@@ -51,7 +51,7 @@ class Connection:
             self.prod_page.deiconify()
             ifOdoo.getFields()
             data = []
-            data = ifOdoo.getManufOrderToDo()
+            data = ifOdoo.getArticle()
             self.prod_app.add_data_to_table(data)
             
         else:

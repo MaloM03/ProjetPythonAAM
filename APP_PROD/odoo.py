@@ -102,3 +102,4 @@ class IF_ErpOdoo:
                 print(f'----------------------------')
                 for k in mo_dico.keys():
                     print(f' - {k} : {mo_dico[k]}')
+            return mo_list

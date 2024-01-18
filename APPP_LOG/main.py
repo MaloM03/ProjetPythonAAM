@@ -9,13 +9,13 @@ if __name__ == "__main__":
     connection_page = tk.Tk()
     
     # Création de la fenêtre principale + mettre invisible
-    log_page = tk.Tk()
-    log_page.withdraw()
-    log_app = Application(log_page,connection_page)
-    connection_app = Connection(connection_page,log_page, log_app) 
+    prod_page = tk.Tk()
+    prod_page.withdraw()
+    prod_app = Application(prod_page,connection_page)
+    connection_app = Connection(connection_page,prod_page, prod_app) 
     
     #ceci est un commentaire
     # Loop des fenetres
     connection_page.mainloop()
-    log_page.mainloop()
+    prod_page.mainloop()
     

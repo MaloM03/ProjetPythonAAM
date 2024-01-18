@@ -35,7 +35,7 @@ class Application :
 
 
         # Ajout des données au tableau
-        self.add_data_to_table()
+        #self.add_data_to_table()
         #self.transform_data()
         
         
@@ -77,16 +77,16 @@ class Application :
         refresh_BP.grid(row=4, column=0, sticky="w", padx=5, pady=5)
         
      #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
-    def add_data_to_table(self):
+    def add_data_to_table(self, OdooData):
         data = []
-        mo_list = [] # rajouter chelou
-        for mo_dico in mo_list:
-            Article = mo_dico['product_id']
-            OF = mo_dico['name']
-            QAP = mo_dico['product_qty']
-            QDP = self.AjoutProd.get()
-            DATE = mo_dico['date_planned_start']
-            ligne = (Article, OF,(QDP,"/",QAP), DATE)
+        for mo_dico in OdooData :
+            
+            Article = mo_dico['display_name']
+            OF = mo_dico['qty_available']
+            QAP = 2 #mo_dico['product_qty']
+            QDP = 2 #mo_dico['qty_producing']
+            DATE = 2 #mo_dico['date_planned_start']
+            ligne = (Article, OF,(QDP, "/" ,QAP), DATE)
             data.append(ligne)
 
          # Efface toutes les lignes actuelles du tableau
