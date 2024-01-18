@@ -81,7 +81,7 @@ class Application :
       data = []
 
       for mo_dico in dataA :
-         Article = mo_dico['display_name']
+         Article = 0
          OF = mo_dico['qty_available']
          QAP = " €" #mo_dico['product_qty']
          QDP = 0
@@ -95,12 +95,13 @@ class Application :
          article, of, (qdp, _, qap), date = data[i]
          
          # Modifier les données spécifiques
-         #article = "NewArticle" + str(i)
+         article = mo_dico['name']
          qdp = mo_dico['list_price']
          #qap = "NewQAP" + str(i)
+         date = mo_dico['default_code']
          
          # Mettre à jour la liste
-         data[i] = (article, of, (qdp, qap), date)
+         data[i] = (article, of, (qdp, " euros"), "base64Images", date)
          i = i + 1
 
          # Efface toutes les lignes actuelles du tableau
@@ -133,30 +134,16 @@ class Application :
          # Efface la saisie AjoutProd après la validation
          self.AjoutProd.delete(0, 'end')
     
-   def refresh(self):
+   def refresh(self, ifOdoo):
 
           # Fonction appelée lors de la validation du bouton
-      self.add_data_to_table()
+      ifOdoo.getFields()
+      dataA = ifOdoo.getArticle()
+      dataB = ifOdoo.getImage()
+      self.add_data_to_table(dataA, dataB)
             
             # Efface la saisie AjoutProd après la validation
       self.AjoutProd.delete(0, 'end')
 
          #Efface l'erreur de saisie 
       prod_labelerror.grid_forget()
-
-#if __name__ == "__main__":
-    # Création de la fenêtre de connection
-    #global prod_page
-    #global connection_page
-    #connection_page = tk.Tk()
-    
-    # Création de la fenêtre principale + mettre invisible
-    #prod_page = tk.Tk()
-    #prod_page.withdraw()
-    #prod_app = Application(prod_page,connection_page)
-    #connection_app = Connection(connection_page,prod_page, prod_app) 
-    
-    
-    # Loop des fenetres
-    #connection_page.mainloop()
-    #prod_page.mainloop()
