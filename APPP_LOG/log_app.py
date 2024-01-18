@@ -6,12 +6,13 @@ from tkinter import ttk
 class Application : 
     
      #=====CREATION DE LA PAGE APPLICATION===== 
-   def __init__(self, log_page, user_name):
+    def __init__(self, log_page, user_name):
       self.logistique = log_page
       self.logistique.title("Application Logistique")
        
         # Définir la taille initiale de la fenêtre
-      self.logistique.geometry("1000x300+500+300")
+      #self.logistique.geometry("1000x300+500+300")
+      self.logistique.geometry("1500x600+1000+600")
 
       self.AjoutProd = tk.Entry(self.logistique)
         
@@ -19,9 +20,10 @@ class Application :
       # Création des widgets pour l'interface utilisateur
       self.create_widgets()
         
-
+    def getOdooRef(self):
+      pass
      #===== TABLEAU PRODUITS =====
-   def create_widgets(self):
+    def create_widgets(self):
       # Création du Treeview (tableau)
       self.tree = ttk.Treeview(self.logistique, columns=("Nom", "Quantité de stok", "Prix àl'unité", "Image de ref", "Code article"))
 
@@ -77,7 +79,7 @@ class Application :
       refresh_BP.grid(row=4, column=0, sticky="w", padx=5, pady=5)
         
      #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
-   def add_data_to_table(self, dataA, dataB):
+    def add_data_to_table(self, dataA, dataB):
       data = []
 
       for mo_dico in dataA :
@@ -114,7 +116,7 @@ class Application :
      #=====BOUTON DE VALIDATION SAISIE STOK=====
             
             
-   def validate_entry(self): 
+    def validate_entry(self): 
          
       ModifStok = self.AjoutProd.get()
     
@@ -134,7 +136,7 @@ class Application :
          # Efface la saisie AjoutProd après la validation
          self.AjoutProd.delete(0, 'end')
     
-   def refresh(self, ifOdoo):
+    def refresh(self):
 
           # Fonction appelée lors de la validation du bouton
       ifOdoo.getFields()
