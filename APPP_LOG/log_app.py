@@ -81,7 +81,7 @@ class Application :
       data = []
 
       for mo_dico in dataA :
-         Article = mo_dico['display_name']
+         Article = 0
          OF = mo_dico['qty_available']
          QAP = " €" #mo_dico['product_qty']
          QDP = 0
@@ -95,12 +95,13 @@ class Application :
          article, of, (qdp, _, qap), date = data[i]
          
          # Modifier les données spécifiques
-         #article = "NewArticle" + str(i)
+         article = mo_dico['name']
          qdp = mo_dico['list_price']
          #qap = "NewQAP" + str(i)
+         date = mo_dico['default_code']
          
          # Mettre à jour la liste
-         data[i] = (article, of, (qdp, qap), date)
+         data[i] = (article, of, (qdp, " euros"), "base64Images", date)
          i = i + 1
 
          # Efface toutes les lignes actuelles du tableau
