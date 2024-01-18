@@ -137,7 +137,7 @@ class IF_ErpOdoo:
 
     def getImage(self):
         if self.mModels is not None:
-            fields = ['image_1920','list_price']
+            fields = ['name','list_price','image_1920']
             limit = 100
             global mo_list
             mo_list = self.mModels.execute_kw(self.mErpDB,self.mUser_id,self.mErpPwd,
