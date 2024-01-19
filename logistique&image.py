@@ -243,172 +243,172 @@ class Connection:
 #=====PAGE D'APPLICATION=====
 class Application : 
     
-     #=====CREATION DE LA PAGE APPLICATION===== 
-   def __init__(self, log_page, user_name):
-      self.logistique = log_page
-      self.logistique.title("Application Logistique")
-       
-        # Définir la taille initiale de la fenêtre
-      self.logistique.geometry("1000x300+500+300")
-
-      self.AjoutProd = tk.Entry(self.logistique)
+        #=====CREATION DE LA PAGE APPLICATION===== 
+    def __init__(self, log_page, user_name):
+        self.logistique = log_page
+        self.logistique.title("Application Logistique")
         
+            # Définir la taille initiale de la fenêtre
+        self.logistique.geometry("1000x300+500+300")
 
-      # Création des widgets pour l'interface utilisateur
-      self.create_widgets()
+        self.AjoutProd = tk.Entry(self.logistique)
+            
+
+        # Création des widgets pour l'interface utilisateur
+        self.create_widgets()
+            
         
-      
-     #===== TABLEAU PRODUITS =====
-   def create_widgets(self):
-      # Création du Treeview (tableau)
-      self.tree = ttk.Treeview(self.logistique, columns=("Nom", "Quantité de stok", "Prix àl'unité", "Code article"))
+        #===== TABLEAU PRODUITS =====
+    def create_widgets(self):
+        # Création du Treeview (tableau)
+        self.tree = ttk.Treeview(self.logistique, columns=("Nom", "Quantité de stok", "Prix àl'unité", "Code article"))
 
-        # Configuration des colonnes
+            # Configuration des colonnes
+            
+        self.tree.heading("Nom", text="Nom")
+        self.tree.heading("Quantité de stok", text="Quantité de stok")
+        self.tree.heading("Prix àl'unité", text="Prix àl'unité")
+        self.tree.heading("Code article", text="Code article")
+
+
+        # Ajout des données au tableau
+        #self.add_data_to_table()
+        #self.transform_data()
+
+        # Affichage du tableau
+        self.tree.grid(row=0, column=0, sticky="nsew")
+            
+
+        # Configuration du redimensionnement de la fenêtre
+        self.logistique.grid_rowconfigure(0, weight=1)
+        self.logistique.grid_columnconfigure(0, weight=1)
+
+        # Suppression de la colonne d'ID
+        self.tree.column("#0", width=0, stretch=tk.NO)
+
+        #===== SAISIE DE L'AJOUT DE PRODUCTION=====
+            # Ajout du label sous le tableau
+        prod_label = tk.Label(self.logistique, text="Modifié stok")
+        prod_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
+            
+            # Ajout du label erreur saisie 
+        global prod_labelerror
+        prod_labelerror = tk.Label(self.logistique, text="Saisie invalide")
+        prod_labelerror.config(fg="red")
+        prod_labelerror.grid(row=4, column=0, sticky="n", padx=5, pady=5)
+        prod_labelerror.grid_forget() 
+
+            # Ajout de la zone de saisie sous le label
+        self.AjoutProd = tk.Entry(self.logistique)
+        self.AjoutProd.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
+
+
+            # Ajout du bouton de validation
+        validate_button = tk.Button(self.logistique, text="Valider", command=self.validate_entry)
+        validate_button.grid(row=3, column=0, sticky="nsew", padx=5, pady=5)
+
+            # Ajout du bouton refresh
+        refresh_BP = tk.Button(self.logistique, text="refresh", command=self.refresh)
+        refresh_BP.grid(row=4, column=0, sticky="w", padx=5, pady=5)
+
+        bouton1= tk.Button(self.logistique, text="Image1", command=self.BP4)
+        bouton1.grid(row=0, column=2, sticky="n", padx=5, pady=5)
         
-      self.tree.heading("Nom", text="Nom")
-      self.tree.heading("Quantité de stok", text="Quantité de stok")
-      self.tree.heading("Prix àl'unité", text="Prix àl'unité")
-      self.tree.heading("Code article", text="Code article")
-
-
-      # Ajout des données au tableau
-      #self.add_data_to_table()
-      #self.transform_data()
-
-      # Affichage du tableau
-      self.tree.grid(row=0, column=0, sticky="nsew")
+        bouton2 = tk.Button(self.logistique, text="Image2", command=self.BP3)
+        bouton2.grid(row=0, column=2, sticky="s", padx=5, pady=5)
         
+        bouton3 = tk.Button(self.logistique, text="Image3", command=self.BP1)
+        bouton3.grid(row=0, column=3, sticky="n", padx=5, pady=5)
 
-      # Configuration du redimensionnement de la fenêtre
-      self.logistique.grid_rowconfigure(0, weight=1)
-      self.logistique.grid_columnconfigure(0, weight=1)
-
-      # Suppression de la colonne d'ID
-      self.tree.column("#0", width=0, stretch=tk.NO)
-
-     #===== SAISIE DE L'AJOUT DE PRODUCTION=====
-        # Ajout du label sous le tableau
-      prod_label = tk.Label(self.logistique, text="Modifié stok")
-      prod_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
-        
-        # Ajout du label erreur saisie 
-      global prod_labelerror
-      prod_labelerror = tk.Label(self.logistique, text="Saisie invalide")
-      prod_labelerror.config(fg="red")
-      prod_labelerror.grid(row=4, column=0, sticky="n", padx=5, pady=5)
-      prod_labelerror.grid_forget() 
-
-        # Ajout de la zone de saisie sous le label
-      self.AjoutProd = tk.Entry(self.logistique)
-      self.AjoutProd.grid(row=2, column=0, sticky="nsew", padx=5, pady=5)
-
-
-        # Ajout du bouton de validation
-      validate_button = tk.Button(self.logistique, text="Valider", command=self.validate_entry)
-      validate_button.grid(row=3, column=0, sticky="nsew", padx=5, pady=5)
-
-        # Ajout du bouton refresh
-      refresh_BP = tk.Button(self.logistique, text="refresh", command=self.refresh)
-      refresh_BP.grid(row=4, column=0, sticky="w", padx=5, pady=5)
-
-      bouton1= tk.Button(self.logistique, text="Image1", command=self.BP4)
-      bouton1.grid(row=0, column=2, sticky="n", padx=5, pady=5)
-      
-      bouton2 = tk.Button(self.logistique, text="Image2", command=self.BP3)
-      bouton2.grid(row=0, column=2, sticky="s", padx=5, pady=5)
-      
-      bouton3 = tk.Button(self.logistique, text="Image3", command=self.BP1)
-      bouton3.grid(row=0, column=3, sticky="n", padx=5, pady=5)
-
-      bouton4 = tk.Button(self.logistique, text="Image4", command=self.BP2)
-      bouton4.grid(row=0, column=3, sticky="s", padx=5, pady=5)
- 
-     #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
-   def add_data_to_table(self, OdooData):
-      data = []
-      for mo_dico in OdooData :
-         
-         Nom = mo_dico['display_name']
-         Stok = mo_dico['qty_available']
-         Prix = 2 #mo_dico['product_qty']
-         #QDP = 2 #mo_dico['qty_producing']
-         Code = "4de56" #mo_dico['date_planned_start']
-         ligne = (Nom, Stok,Prix,Code)
-         data.append(ligne)
-         
-         # Efface toutes les lignes actuelles du tableau
-         for item in self.tree.get_children():
-           self.tree.delete(item)
-         #Apres avoir effacé on re - affiche le tableau modifié 
-         for item1 in data:
-            self.tree.insert("", "end", values=item1)
-
-
-     #=====BOUTON DE VALIDATION SAISIE STOK=====
-                
-   def validate_entry(self): 
-         
-      ModifStok = self.AjoutProd.get()
+        bouton4 = tk.Button(self.logistique, text="Image4", command=self.BP2)
+        bouton4.grid(row=0, column=3, sticky="s", padx=5, pady=5)
     
-      if ModifStok.isdigit():
-         # Fonction appelée lors de la validation du bouton
-         ifOdoo.getFields()
-         data = []
-         data = ifOdoo.getArticle()
-         prod_app.add_data_to_table(data)
-
-         # Efface la saisie AjoutProd après la validation
-         self.AjoutProd.delete(0, 'end')
-
-         #Efface l'erreur de saisie 
-         prod_labelerror.grid_forget()
-
-      else: 
-         prod_labelerror.grid(row=4, column=0)
-
-         # Efface la saisie AjoutProd après la validation
-         self.AjoutProd.delete(0, 'end')
-    
-   def refresh(self):
-
-          # Fonction appelée lors de la validation du bouton
-        ifOdoo.getFields()
+        #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
+    def add_data_to_table(self, OdooData):
         data = []
-        data = ifOdoo.getArticle()
-        prod_app.add_data_to_table(data)
+        for mo_dico in OdooData :
+            
+            Nom = mo_dico['display_name']
+            Stok = mo_dico['qty_available']
+            Prix = 2 #mo_dico['product_qty']
+            #QDP = 2 #mo_dico['qty_producing']
+            Code = "4de56" #mo_dico['date_planned_start']
+            ligne = (Nom, Stok,Prix,Code)
+            data.append(ligne)
+            
+            # Efface toutes les lignes actuelles du tableau
+            for item in self.tree.get_children():
+             self.tree.delete(item)
+            #Apres avoir effacé on re - affiche le tableau modifié 
+            for item1 in data:
+                self.tree.insert("", "end", values=item1)
+
+
+        #=====BOUTON DE VALIDATION SAISIE STOK=====
+                    
+    def validate_entry(self): 
+            
+        ModifStok = self.AjoutProd.get()
         
+        if ModifStok.isdigit():
+            # Fonction appelée lors de la validation du bouton
+            ifOdoo.getFields()
+            data = []
+            data = ifOdoo.getArticle()
+            prod_app.add_data_to_table(data)
+
             # Efface la saisie AjoutProd après la validation
-        self.AjoutProd.delete(0, 'end')
+            self.AjoutProd.delete(0, 'end')
 
-         #Efface l'erreur de saisie 
-        prod_labelerror.grid_forget()
-    
-   def BP1(self):
-        if root is not None:
-            root.destroy()
-        print("licorne")
-        Affiche_Image(Image1)
+            #Efface l'erreur de saisie 
+            prod_labelerror.grid_forget()
 
-   def BP2(self):
-        if root is not None:
-            root.destroy()
-        print("ours")
-        Affiche_Image(Image2)
+        else: 
+            prod_labelerror.grid(row=4, column=0)
 
-   def BP3(self):
-        if root is not None:
-            root.destroy()
-           
-        print("grenouille")
-        Affiche_Image(Image3)
+            # Efface la saisie AjoutProd après la validation
+            self.AjoutProd.delete(0, 'end')
+        
+    def refresh(self):
 
-   def BP4(self):
-        if root is None:
-            root.destroy()
+            # Fonction appelée lors de la validation du bouton
+            ifOdoo.getFields()
+            data = []
+            data = ifOdoo.getArticle()
+            prod_app.add_data_to_table(data)
             
+                # Efface la saisie AjoutProd après la validation
+            self.AjoutProd.delete(0, 'end')
+
+            #Efface l'erreur de saisie 
+            prod_labelerror.grid_forget()
+        
+    def BP1(self):
+            if root is not None:
+                root.destroy()
+            print("licorne")
+            Affiche_Image(Image1)
+
+    def BP2(self):
+            if root is not None:
+                root.destroy()
+            print("ours")
+            Affiche_Image(Image2)
+
+    def BP3(self):
+            if root is not None:
+                root.destroy()
             
-        print("elephan")
-        Affiche_Image(Image4)
+            print("grenouille")
+            Affiche_Image(Image3)
+
+    def BP4(self):
+            if root is None:
+                root.destroy()
+                
+                
+            print("elephan")
+            Affiche_Image(Image4)
         
 
 
