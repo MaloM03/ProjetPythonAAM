@@ -311,17 +311,20 @@ class Application :
         refresh_BP = tk.Button(self.logistique, text="refresh", command=self.refresh)
         refresh_BP.grid(row=4, column=0, sticky="w", padx=5, pady=5)
 
-        bouton1= tk.Button(self.logistique, text="Image1", command=self.BP4)
+        bouton1= tk.Button(self.logistique, text="Image1", command=self.BP1)
         bouton1.grid(row=0, column=2, sticky="n", padx=5, pady=5)
         
-        bouton2 = tk.Button(self.logistique, text="Image2", command=self.BP3)
+        bouton2 = tk.Button(self.logistique, text="Image2", command=self.BP2)
         bouton2.grid(row=0, column=2, sticky="s", padx=5, pady=5)
         
-        bouton3 = tk.Button(self.logistique, text="Image3", command=self.BP1)
+        bouton3 = tk.Button(self.logistique, text="Image3", command=self.BP3)
         bouton3.grid(row=0, column=3, sticky="n", padx=5, pady=5)
 
-        bouton4 = tk.Button(self.logistique, text="Image4", command=self.BP2)
+        bouton4 = tk.Button(self.logistique, text="Image4", command=self.BP4)
         bouton4.grid(row=0, column=3, sticky="s", padx=5, pady=5)
+
+        boutonf = tk.Button(self.logistique, text="Imagef", command=self.BPF)
+        boutonf.grid(row=0, column=3, sticky="e", padx=5, pady=5)
     
         #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
     def add_data_to_table(self, OdooData):
@@ -403,6 +406,14 @@ class Application :
             Affiche_Image(Image3)
 
     def BP4(self):
+            if root is not None:
+                root.destroy()
+                
+                
+            print("elephan")
+            Affiche_Image(Image4)
+
+    def BPF(self):
             if root is None:
                 root.destroy()
                 
