@@ -1,12 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
 import xmlrpc.client
+import re
 
 #=====PAGE D'APPLICATION=====
 class Application : 
     
      #=====CREATION DE LA PAGE APPLICATION===== 
     def __init__(self, prod_page, user_name):
+        self.selected_id = 0
         self.production = prod_page
         self.production.title("Application Production")
        
@@ -31,7 +33,8 @@ class Application :
         self.tree.heading("N° OF", text="N° OF")
         self.tree.heading("Quantité à produire", text="Quantité à produire")
         self.tree.heading("Echéance", text="Echéance")
-
+      
+        self.tree.bind('<<TreeviewSelect>>', self.on_select) #lier la fonction on_select a la selection de ligne dans le tableau
         # Ajout des données au tableau
         #self.add_data_to_table()
         #self.transform_data()
@@ -90,3 +93,24 @@ class Application :
          # Efface la saisie AjoutProd après la validation
          self.AjoutProd.delete(0, 'end')
          
+    def on_select(self, event):
+        # Récupère l'élément sélectionné dans le tableau
+        selected_item = self.tree.selection()
+
+        # Vérifie si un élément est effectivement sélectionné
+        if selected_item:
+            # Récupère les valeurs des colonnes de l'élément sélectionné
+            values = self.tree.item(selected_item)['values']
+            print("Éléments sélectionnés:", values)
+
+            # Extrait le nombre de la chaîne "WH/MO/00006"
+            selected_id = self.extract_number(values[1])
+            print("Numéro extrait:", selected_id)
+
+    def extract_number(self, input_string):
+        # Utilise une expression régulière pour extraire les chiffres de la chaîne
+        match = re.search(r'\d+', input_string)
+        if match:
+            return int(match.group())
+        else:
+            return None
