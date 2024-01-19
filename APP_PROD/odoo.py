@@ -122,6 +122,7 @@ class IF_ErpOdoo:
         :param new_qty_producing: La nouvelle quantité produite de l'ordre de fabrication.
         :return: True si la mise à jour a réussi, False sinon.
         """
+        print("update lancé")
         if self.mModels is not None:
             try:
                 # Effectuez la mise à jour de la quantité produite de l'ordre de fabrication

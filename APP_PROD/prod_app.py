@@ -21,7 +21,9 @@ class Application :
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
         
-
+    def set_odoo(self, currentOdoo):
+        self.odooRef = currentOdoo
+        
      #===== TABLEAU PRODUITS =====
     def create_widgets(self):
         # Création du Treeview (tableau)
@@ -88,10 +90,13 @@ class Application :
      #=====BOUTON DE VALIDATION SAISIE PROD=====
     def validate_entry(self): 
          # Fonction appelée lors de la validation du bouton
-         self.add_data_to_table()
+         valeur = self.AjoutProd.get()
+         self.odooRef.update_manufacturing_order_qty_producing(self.selected_id, valeur)
+         print("Modified ID :")
+         print(self.selected_id)
+         print("Valeur emise : ")
+         print(valeur)
 
-         # Efface la saisie AjoutProd après la validation
-         self.AjoutProd.delete(0, 'end')
          
     def on_select(self, event):
         # Récupère l'élément sélectionné dans le tableau
