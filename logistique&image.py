@@ -417,6 +417,8 @@ if __name__ == "__main__":
     # Création de la fenêtre de connection
     #global prod_page
     #global connection_page
+    #sdfghjk
+    
 
     ifOdoo = IF_ErpOdoo("172.31.10.188", "8069","amaDB", "admin", "adminpython2024")
     if ifOdoo.connect():
