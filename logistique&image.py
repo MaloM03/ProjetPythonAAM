@@ -323,9 +323,6 @@ class Application :
         bouton4 = tk.Button(self.logistique, text="Image4", command=self.BP4)
         bouton4.grid(row=0, column=3, sticky="s", padx=5, pady=5)
 
-        boutonf = tk.Button(self.logistique, text="Imagef", command=self.BPF)
-        boutonf.grid(row=0, column=3, sticky="e", padx=5, pady=5)
-    
         #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
     def add_data_to_table(self, OdooData):
         data = []
@@ -401,25 +398,15 @@ class Application :
     def BP3(self):
             if root is not None:
                 root.destroy()
-            
             print("grenouille")
             Affiche_Image(Image3)
 
     def BP4(self):
-            if root is not None:
-                root.destroy()
-                
-                
+            if root is None:
+                root.destroy() 
             print("elephan")
             Affiche_Image(Image4)
 
-    def BPF(self):
-            if root is None:
-                root.destroy()
-                
-                
-            print("elephan")
-            Affiche_Image(Image4)
         
 
 
