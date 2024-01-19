@@ -104,9 +104,10 @@ class IF_ErpOdoo:
             limit = 10
             global mo_list
             mo_list = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
-                    'mrp.production', 'search_read',
-                    [[('state', '=', 'confirmed'), ('qty_produced', '!=', 'product_qty')]],
-                    {'fields': fields, 'limit': limit})
+                    'mrp.production', 'search_read',[],
+                    #[[('state', '=', 'confirmed'), ('qty_produced', '!=', 'product_qty')]],
+                    {'fields': fields, 'limit': limit})   
+        
             
             for mo_dico in mo_list:
                 print(f'----------------------------')
