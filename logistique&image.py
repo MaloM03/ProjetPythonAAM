@@ -6,8 +6,8 @@ from io import BytesIO
 from PIL import Image
 from PIL import ImageTk
 
-
-def display_resized_image_in_tkinter(encoded_string, width=150, height=150):
+global encoded_string
+def Affiche_Image(encoded_string, width=150, height=150):
     
     # Décode la chaîne base64
     decoded_bytes = base64.b64decode(encoded_string)
@@ -19,6 +19,7 @@ def display_resized_image_in_tkinter(encoded_string, width=150, height=150):
     resized_image = original_image.resize((width, height))
 
     # Crée une fenêtre Tkinter
+    global root
     root = tk.Tk()
     root.title("Resized Image Decoding")
     root.geometry("200x150+850+300")
@@ -31,11 +32,13 @@ def display_resized_image_in_tkinter(encoded_string, width=150, height=150):
     # Crée un widget Label pour afficher l'image
     label = tk.Label(root, image=tk_image)
     label.pack()
-    root.destroy()
 
+    if debut == 0 :
+       root.destroy()
+
+    
     # Lance la boucle principale Tkinter
     root.mainloop()
-
 
 #=====PROGRAMME DE CONNECTION A ODOO====
 class IF_ErpOdoo:
@@ -156,28 +159,23 @@ class IF_ErpOdoo:
                 {'fields': fields, 'limit': limit})
             for mo_dico in mo_list:
                 print(f'----------------------------')
-                display_resized_image_in_tkinter(mo_dico['image_1920'])
+                Affiche_Image(mo_dico['image_1920'])
                 
                 for k in mo_dico.keys():
                     print(f' - {k} : {mo_dico[k]}')
                     print(mo_dico[k])
                     if mo_dico[k] ==  1 :
-                        Image1 = tk_image
-                        print(f'----------------------------')
-                        print("ok c'est bon")
+                        Image1 = mo_dico['image_1920']
+                        
                     if mo_dico[k] ==  2 :
-                        Image2 = tk_image
-                        print(f'----------------------------')
-                        print("ok c'est bon 2")
+                        Image2 = mo_dico['image_1920']
+                        
                     if mo_dico[k] ==  3 :
-                        Image3 = tk_image
-                        print(f'----------------------------')
-                        print("ok c'est bon 3")
+                        Image3 = mo_dico['image_1920']
+                        
                     if mo_dico[k] ==  4 :
-                        Image4 = tk_image
-                        print(f'----------------------------')
-                        print("ok c'est bon 4")
-
+                        Image4 = mo_dico['image_1920']
+                
 class Connection:
     def __init__(self, connection_page, prod_page, prod_app):
         self.prod_app = prod_app
@@ -185,7 +183,6 @@ class Connection:
         self.ID = connection_page
         self.ID.title("Connection App Prod")
         self.ID.geometry("200x150+850+300")
-
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
@@ -260,7 +257,7 @@ class Application :
       # Création des widgets pour l'interface utilisateur
       self.create_widgets()
         
-
+      
      #===== TABLEAU PRODUITS =====
    def create_widgets(self):
       # Création du Treeview (tableau)
@@ -277,8 +274,6 @@ class Application :
       # Ajout des données au tableau
       #self.add_data_to_table()
       #self.transform_data()
-        
-        
 
       # Affichage du tableau
       self.tree.grid(row=0, column=0, sticky="nsew")
@@ -327,7 +322,7 @@ class Application :
 
       bouton4 = tk.Button(self.logistique, text="Image4", command=self.BP2)
       bouton4.grid(row=0, column=3, sticky="s", padx=5, pady=5)
-
+ 
      #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
    def add_data_to_table(self, OdooData):
       data = []
@@ -347,21 +342,6 @@ class Application :
          #Apres avoir effacé on re - affiche le tableau modifié 
          for item1 in data:
             self.tree.insert("", "end", values=item1)
-
-   def getImage(self):
-        if self.mModels is not None:
-            fields = ['name','list_price','image_1920']
-            limit = 100
-            global mo_list
-            mo_list = self.mModels.execute_kw(self.mErpDB,self.mUser_id,self.mErpPwd,
-                'product.template','search_read',
-                [],
-                {'fields': fields, 'limit': limit})
-            for mo_dico in mo_list:
-                print(f'----------------------------')
-                #display_resized_image_in_tkinter(mo_dico['image_1920'])
-                for k in mo_dico.keys():
-                    print(f' - {k} : {mo_dico[k]}')
 
 
      #=====BOUTON DE VALIDATION SAISIE STOK=====
@@ -404,22 +384,40 @@ class Application :
         prod_labelerror.grid_forget()
     
    def BP1(self):
-        print(Image1)
+        if root is not None:
+            root.destroy()
+        print("licorne")
+        Affiche_Image(Image1)
+
    def BP2(self):
-        print(Image2)
+        if root is not None:
+            root.destroy()
+        print("ours")
+        Affiche_Image(Image2)
+
    def BP3(self):
-        print(Image3)
+        if root is not None:
+            root.destroy()
+           
+        print("grenouille")
+        Affiche_Image(Image3)
+
    def BP4(self):
-        print(Image4)
+        if root is None:
+            root.destroy()
+            
+            
+        print("elephan")
+        Affiche_Image(Image4)
+        
 
 
 if __name__ == "__main__":
     # Création de la fenêtre de connection
     #global prod_page
     #global connection_page
-    #sdfghjk
-    
-
+    global debut
+    debut = 0 
     ifOdoo = IF_ErpOdoo("172.31.10.188", "8069","amaDB", "admin", "adminpython2024")
     if ifOdoo.connect():
         ifOdoo.getFields()
@@ -433,9 +431,10 @@ if __name__ == "__main__":
     prod_page.withdraw()
     prod_app = Application(prod_page,connection_page)
     connection_app = Connection(connection_page,prod_page, prod_app) 
-    
+    debut = 1
     #ceci est un commentaire
     # Loop des fenetres
     connection_page.mainloop()
     prod_page.mainloop()
+    
     
