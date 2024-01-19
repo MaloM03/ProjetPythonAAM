@@ -1,37 +1,35 @@
 import tkinter as tk
 
-def ouvrir_page1():
-    global page1
-    if page1 is None:
-        page1 = tk.Toplevel(fenetre_principale)
-        page1.title("Page 1")
-        label_page1 = tk.Label(page1, text="Contenu de la page 1")
-        label_page1.pack(padx=20, pady=20)
-        bouton_fermer_page1 = tk.Button(page1, text="Fermer la page 1", command=fermer_page1)
-        bouton_fermer_page1.pack(pady=10)
-    else:
-        label_deja_ouvert.pack()
+class Application:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Fenêtre Principale")
 
-def fermer_page1():
-    global page1
-    if page1 is not None:
-        page1.destroy()
-        page1 = None
-        label_deja_ouvert.pack_forget()
+        # Bouton pour vérifier si la fenêtre existe
+        self.bouton_verifier = tk.Button(root, text="Vérifier si page1 existe", command=self.verifier_page1)
+        self.bouton_verifier.pack(pady=20)
 
-# Créer la fenêtre principale
-fenetre_principale = tk.Tk()
-fenetre_principale.title("Fenêtre Principale")
+    def verifier_page1(self):
+        # Vérifier si la fenêtre page1 existe
+        if hasattr(self, 'page1') and self.page1.winfo_exists():
+            print("Label1: Oui")
+            self.page1.destroy()
+        else:
+            print("Label1: Non")
+            
 
-# Créer un bouton pour ouvrir la page 1
-bouton_ouvrir_page1 = tk.Button(fenetre_principale, text="Ouvrir Page 1", command=ouvrir_page1)
-bouton_ouvrir_page1.pack(pady=20)
+        # Afficher la fenêtre page1 si elle existe, sinon la créer
+       # self.afficher_page1()
 
-# Créer un label pour afficher "Déjà ouvert"
-label_deja_ouvert = tk.Label(fenetre_principale, text="Déjà ouvert", fg="red")
+    def afficher_page1(self):
+        if not hasattr(self, 'page1') or not self.page1.winfo_exists():
+            self.page1 = tk.Toplevel(self.root)
+            self.page1.title("Page1")
+            
+            # Contenu de la fenêtre page1
+            
 
-# Initialiser la variable de la page1 à None
-page1 = None
-
-# Démarrer la boucle principale Tkinter
-fenetre_principale.mainloop()
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = Application(root)
+    root.mainloop()
