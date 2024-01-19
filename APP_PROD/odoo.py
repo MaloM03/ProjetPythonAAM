@@ -58,16 +58,16 @@ class IF_ErpOdoo:
             # Récupération des ordres de fabrication
             mo_list = self.getManufOrderToDo()
 
-            # Mise à jour de la quantité d'un ordre de fabrication (ex: ID 4 ) à 15
+            # Mise à jour de la quantité produite d'un ordre de fabrication (ex: ID 4 ) à 15
             order_id = 4
-            new_qty = 15
+            new_qty_producing = 15
 
-            result = self.update_manufacturing_order_qty(order_id, new_qty)
+            result = self.update_manufacturing_order_qty_producing(order_id, new_qty_producing)
 
             if result:
-                print(f"Quantité d'article mise à jour pour l'ordre de fabrication {order_id}")
+                print(f"Quantité produite mise à jour pour l'ordre de fabrication {order_id}")
             else:
-                print(f"Échec de la mise à jour de la quantité d'article pour l'ordre de fabrication {order_id}")
+                print(f"Échec de la mise à jour de la quantité produite pour l'ordre de fabrication {order_id}")
 
             # Ajout de l'appel pour afficher les articles après la mise à jour
             self.getArticle()
@@ -105,7 +105,6 @@ class IF_ErpOdoo:
             global mo_list
             mo_list = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
                     'mrp.production', 'search_read',[],
-                    #[[('state', '=', 'confirmed'), ('qty_produced', '!=', 'product_qty')]],
                     {'fields': fields, 'limit': limit})   
         
             
@@ -115,24 +114,24 @@ class IF_ErpOdoo:
                     print(f' - {k} : {mo_dico[k]}')
             return mo_list
 
-    def update_manufacturing_order_qty(self, order_id, new_qty):
+    def update_manufacturing_order_qty_producing(self, order_id, new_qty_producing):
         """
-        Met à jour la quantité d'un ordre de fabrication dans Odoo.
+        Met à jour la quantité produite d'un ordre de fabrication dans Odoo.
 
         :param order_id: L'ID de l'ordre de fabrication à mettre à jour.
-        :param new_qty: La nouvelle quantité de l'ordre de fabrication.
+        :param new_qty_producing: La nouvelle quantité produite de l'ordre de fabrication.
         :return: True si la mise à jour a réussi, False sinon.
         """
         if self.mModels is not None:
             try:
-                # Effectuez la mise à jour de la quantité de l'ordre de fabrication
+                # Effectuez la mise à jour de la quantité produite de l'ordre de fabrication
                 self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
                         'mrp.production', 'write',
-                        [[order_id], {'product_qty': new_qty}])
+                        [[order_id], {'qty_producing': new_qty_producing}])
                 
                 return True
             except xmlrpc.client.Fault as e:
-                print(f"Erreur lors de la mise à jour de la quantité de l'ordre de fabrication : {e}")
+                print(f"Erreur lors de la mise à jour de la quantité produite de l'ordre de fabrication : {e}")
                 return False
         else:
             print("Veuillez d'abord vous connecter à Odoo.")
