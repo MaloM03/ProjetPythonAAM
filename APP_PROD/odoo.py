@@ -161,5 +161,5 @@ class IF_ErpOdoo:
         pass
 
 # Exemple d'utilisation
-obj = IF_ErpOdoo('172.31.10.188', '8069', 'amaDB', 'a', 'a')
-obj.setServer('172.31.10.188', '8069')
+#obj = IF_ErpOdoo('172.31.10.188', '8069', 'amaDB', 'a', 'a')
+#obj.setServer('172.31.10.188', '8069')
