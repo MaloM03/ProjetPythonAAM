@@ -109,8 +109,8 @@ class Application :
             print("Éléments sélectionnés:", values)
 
             # Extrait le nombre de la chaîne "WH/MO/00006"
-            selected_id = self.extract_number(values[1])
-            print("Numéro extrait:", selected_id)
+            self.selected_id = self.extract_number(values[1])
+            print("Numéro extrait:", self.selected_id)
 
     def extract_number(self, input_string):
         # Utilise une expression régulière pour extraire les chiffres de la chaîne
