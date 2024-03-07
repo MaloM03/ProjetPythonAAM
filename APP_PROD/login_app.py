@@ -8,8 +8,8 @@ class Connection:
         self.prod_app = prod_app
         self.prod_page = prod_page
         self.ID = connection_page
-        self.ID.title("Connection App Prod")
-        self.ID.geometry("200x150+850+300")
+        self.ID.title("AMA - Application Production")
+        self.ID.geometry("400x120+850+300")
 
 
         # Création des widgets pour l'interface utilisateur
@@ -18,7 +18,7 @@ class Connection:
     def create_widgets(self):
         #===== USER =====
         # Création d'une étiquette
-        user_label = tk.Label(self.ID, text="User : ")
+        user_label = tk.Label(self.ID, text="Utilisateur : ")
         user_label.pack()
 
         # Création d'une zone de saisie
@@ -27,7 +27,7 @@ class Connection:
 
         #===== PASSWORD =====
         # Création d'une étiquette
-        password_label = tk.Label(self.ID, text="Password : ")
+        password_label = tk.Label(self.ID, text="Mot de passe : ")
         password_label.pack()
 
         # Création d'une zone de saisie
