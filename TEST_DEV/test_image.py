@@ -10,11 +10,11 @@ import tkinter as tk
 
 def display_resized_image_in_tkinter(encoded_string, width=128, height=128):
     # Décode la chaîne base64
-    decoded_bytes = base64.b64decode(encoded_string)
-
+    #decoded_bytes = base64.b64decode(encoded_string)
+    
     # Crée une image à partir des données décodées
-    original_image = Image.open(BytesIO(decoded_bytes))
-
+    #original_image = Image.open(BytesIO(decoded_bytes))
+    original_image = Image.open("APP_PROD/ressources/logo.png")
     # Redimensionne l'image
     resized_image = original_image.resize((width, height))
 
@@ -31,6 +31,16 @@ def display_resized_image_in_tkinter(encoded_string, width=128, height=128):
     label.pack()
 
     # Lance la boucle principale Tkinter
+    root.mainloop()
+
+def display_image():
+    original_image = Image.open("APP_PROD/ressources/logo.png")
+    resized_image = original_image.resize((128, 128))
+    root = tk.Tk()
+    root.title("Resized Image Decoding")
+    tk_image = ImageTk.PhotoImage(resized_image)
+    label = tk.Label(root, image=tk_image)
+    label.pack()
     root.mainloop()
 
 #=====PROGRAMME DE CONNECTION A ODOO====
@@ -170,8 +180,4 @@ class IF_ErpOdoo:
 
 
 if __name__ == "__main__":
-    ifOdoo = IF_ErpOdoo("172.31.10.188", "8069","amaDB", "admin", "adminpython2024")
-    if ifOdoo.connect():
-        ifOdoo.getFields()
-        data = []
-        data = ifOdoo.getImage()
+    display_image()

@@ -1,6 +1,7 @@
 from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import ttk
+
 import xmlrpc.client
 from odoo import *
 
@@ -12,7 +13,6 @@ class Connection:
         self.ID.title("AMA - Application Production")
         self.ID.geometry("400x300+850+300")
 
-
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
 
@@ -21,10 +21,9 @@ class Connection:
         # LOGO
         logo = Image.open("APP_PROD/ressources/logo.png")
         logo = logo.resize((100, 100))
-        print(logo)
         logo_tk = ImageTk.PhotoImage(logo) # Conversion de l'image en format Tkinter
         logo_label = tk.Label(self.ID, image=logo_tk) # Création d'un label pour afficher l'image
-        #label_logo = label_logo.config(width=100, height=50)
+        #logo_label = logo_label.config(width=100, height=50)
         logo_label.lift()
         logo_label.pack()
 
