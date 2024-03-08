@@ -9,16 +9,20 @@ class Connection:
         self.prod_page = prod_page
         self.ID = connection_page
         self.ID.title("AMA - Application Production")
-        self.ID.geometry("400x120+850+300")
+        self.ID.geometry("400x300+850+300")
 
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
 
     def create_widgets(self):
+
+        main_label = tk.Label(self.ID, text="Application Production", font=("Arial", 16),padx=0, pady=25)
+        main_label.pack()
+
         #===== USER =====
         # Création d'une étiquette
-        user_label = tk.Label(self.ID, text="Utilisateur : ")
+        user_label = tk.Label(self.ID, text="Utilisateur : ",padx=0, pady=5)
         user_label.pack()
 
         # Création d'une zone de saisie
@@ -27,7 +31,7 @@ class Connection:
 
         #===== PASSWORD =====
         # Création d'une étiquette
-        password_label = tk.Label(self.ID, text="Mot de passe : ")
+        password_label = tk.Label(self.ID, text="Mot de passe : ",padx=0, pady=5)
         password_label.pack()
 
         # Création d'une zone de saisie
@@ -37,7 +41,13 @@ class Connection:
         # Lier l'événement de pression de la touche Entrée à la fonction Validation
         self.password_entry.bind("<Return>", self.validation)
 
+        bp_validation = tk.Button(self.ID,text="Connection",font=("Arial", 16),padx=0,pady=0,command=self.connection)
+        bp_validation.pack()
+
     def validation(self, event):
+        self.connection()
+
+    def connection(self):
         user_name = self.user_entry.get()
         password = self.password_entry.get()
        
@@ -58,11 +68,11 @@ class Connection:
         else:
             # Création d'une fenêtre d'erreur
             error_window = tk.Toplevel(self.ID)
-            error_window.title("Error")
-            error_window.geometry("200x60+850+350")
+            error_window.title("Erreur de connection")
+            error_window.geometry("400x120+850+350")
 
             # Ajout des éléments à la fenêtre d'erreur
-            error_label = tk.Label(error_window, text="User/Password incorrect")
+            error_label = tk.Label(error_window, text="Vos identifiants sont incorrect \n ou problème de connection au serveur",font=("Arial", 12),padx=0,pady=10)
             error_label.pack()
 
             # Effacement des champs de saisie
