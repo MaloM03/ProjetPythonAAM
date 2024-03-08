@@ -1,3 +1,4 @@
+from PIL import Image, ImageTk
 import tkinter as tk
 from tkinter import ttk
 import xmlrpc.client
@@ -17,6 +18,17 @@ class Connection:
 
     def create_widgets(self):
 
+        # LOGO
+        logo = Image.open("APP_PROD/ressources/logo.png")
+        logo = logo.resize((100, 100))
+        print(logo)
+        logo_tk = ImageTk.PhotoImage(logo) # Conversion de l'image en format Tkinter
+        logo_label = tk.Label(self.ID, image=logo_tk) # Création d'un label pour afficher l'image
+        #label_logo = label_logo.config(width=100, height=50)
+        logo_label.lift()
+        logo_label.pack()
+
+        #Main label Titre
         main_label = tk.Label(self.ID, text="Application Production", font=("Arial", 16),padx=0, pady=25)
         main_label.pack()
 
