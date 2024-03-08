@@ -13,7 +13,7 @@ class Application :
         self.production.title("Application Production")
        
         # Définir la taille initiale de la fenêtre
-        self.production.geometry("800x300+750+300")
+        self.production.geometry("1200x600+750+300")
 
         self.AjoutProd = tk.Entry(self.production)
         
@@ -33,7 +33,7 @@ class Application :
         
         self.tree.heading("Nom", text="Nom")
         self.tree.heading("N° OF", text="N° OF")
-        self.tree.heading("Quantité à produire", text="Quantité à produire")
+        self.tree.heading("Quantité à produire", text="Nombre d'article réalisé")
         self.tree.heading("Echéance", text="Echéance")
       
         self.tree.bind('<<TreeviewSelect>>', self.on_select) #lier la fonction on_select a la selection de ligne dans le tableau
@@ -56,7 +56,7 @@ class Application :
 
      #===== SAISIE DE L'AJOUT DE PRODUCTION=====
         # Ajout du label sous le tableau
-        prod_label = tk.Label(self.production, text="Ajouter une production")
+        prod_label = tk.Label(self.production, text="Modifier le nombre de pièce réaliser sur l'OF sélectioné :")
         prod_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
 
         # Ajout de la zone de saisie sous le label
@@ -89,13 +89,23 @@ class Application :
 
      #=====BOUTON DE VALIDATION SAISIE PROD=====
     def validate_entry(self): 
-         # Fonction appelée lors de la validation du bouton
-         valeur = self.AjoutProd.get()
-         self.odooRef.update_manufacturing_order_qty_producing(self.selected_id, valeur)
-         print("Modified ID :")
-         print(self.selected_id)
-         print("Valeur emise : ")
-         print(valeur)
+        # Fonction appelée lors de la validation du bouton
+        valeur = self.AjoutProd.get()
+        self.odooRef.update_manufacturing_order_qty_producing(self.selected_id, valeur)
+        print("Modified ID :")
+        print(self.selected_id)
+        print("Valeur emise : ")
+        print(valeur)
+
+        #Actualiser le tableau après une modification
+        self.odooRef.getFields()
+        data = self.odooRef.getManufOrderToDo()
+
+        self.add_data_to_table(data)
+
+        self.AjoutProd.set("")
+        self.AjoutProd.delete(0, "end")
+        self.AjoutProd.update()
 
          
     def on_select(self, event):
