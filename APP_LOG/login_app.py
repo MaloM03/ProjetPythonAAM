@@ -8,17 +8,21 @@ class Connection:
         self.prod_app = prod_app
         self.prod_page = prod_page
         self.ID = connection_page
-        self.ID.title("Connection App Prod")
-        self.ID.geometry("200x150+850+300")
+        self.ID.title("AMA - Application Logistique")
+        self.ID.geometry("400x300+850+300")
 
 
         # Création des widgets pour l'interface utilisateur
         self.create_widgets()
 
     def create_widgets(self):
+        #Main label Titre
+        main_label = tk.Label(self.ID, text="Application Logistique", font=("Arial", 16),padx=0, pady=25)
+        main_label.pack()
+
         #===== USER =====
         # Création d'une étiquette
-        user_label = tk.Label(self.ID, text="User : ")
+        user_label = tk.Label(self.ID, text="Utilisateur : ",padx=0, pady=5)
         user_label.pack()
 
         # Création d'une zone de saisie
@@ -27,7 +31,7 @@ class Connection:
 
         #===== PASSWORD =====
         # Création d'une étiquette
-        password_label = tk.Label(self.ID, text="Password : ")
+        password_label = tk.Label(self.ID, text="Mot de passe : ",padx=0, pady=5)
         password_label.pack()
 
         # Création d'une zone de saisie
@@ -37,7 +41,13 @@ class Connection:
         # Lier l'événement de pression de la touche Entrée à la fonction Validation
         self.password_entry.bind("<Return>", self.validation)
 
+        bp_validation = tk.Button(self.ID,text="Connection",font=("Arial", 16),padx=0,pady=0,command=self.connection)
+        bp_validation.pack()
+
     def validation(self, event):
+        self.connection()
+
+    def connection(self):
         user_name = self.user_entry.get()
         password = self.password_entry.get()
         global ifOdoo

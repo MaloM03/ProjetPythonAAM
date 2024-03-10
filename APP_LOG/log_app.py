@@ -31,8 +31,8 @@ class Application :
         
       self.tree.heading("Nom", text="Nom")
       self.tree.heading("Quantité de stok", text="Quantité de stok")
-      self.tree.heading("Prix àl'unité", text="Prix àl'unité")
-      self.tree.heading("Image de ref", text="Image de ref")
+      self.tree.heading("Prix àl'unité", text="Prix unitaire")
+      self.tree.heading("Image de ref", text="Image article")
       self.tree.heading("Code article", text="Code article")
 
 
