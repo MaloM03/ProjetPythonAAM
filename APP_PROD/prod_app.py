@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import xmlrpc.client
 import re
+from operator import itemgetter
 
 #=====PAGE D'APPLICATION=====
 class Application : 
@@ -72,13 +73,16 @@ class Application :
         data = []
         for mo_dico in OdooData :
             
-            Article = mo_dico['product_id']
+            Article = mo_dico['product_id'][1]
             OF = mo_dico['name']
             QAP = mo_dico['product_qty']
             QDP = mo_dico['qty_producing']
             DATE = mo_dico['date_planned_start']
             ligne = (Article, OF,(QDP, "/" ,QAP), DATE)
             data.append(ligne)
+
+        #trier des data en fonction de la date prévu de prod
+        data.sort(key=itemgetter(3))
 
          # Efface toutes les lignes actuelles du tableau
         for item in self.tree.get_children():
@@ -103,9 +107,9 @@ class Application :
 
         self.add_data_to_table(data)
 
-        self.AjoutProd.set("")
-        self.AjoutProd.delete(0, "end")
-        self.AjoutProd.update()
+        #self.AjoutProd.set("")
+        #self.AjoutProd.delete(0, "end")
+        #self.AjoutProd.update()
 
          
     def on_select(self, event):
