@@ -22,6 +22,7 @@ class Application :
         
     def set_odoo(self, currentOdoo):
         self.odooRef = currentOdoo
+        
      #===== TABLEAU PRODUITS =====
     def create_widgets(self):
       # Création du Treeview (tableau)
@@ -135,7 +136,7 @@ class Application :
     def validate_entry(self):
 
       valeur = self.AjoutProd.get()
-      self.odooRef.update_product_qty(self.selectedID, 66)
+      self.odooRef.update_product_qty(2, 66)
       print("Modified ID :")
       print(self.selectedID)
       print("Valeur emise : ")

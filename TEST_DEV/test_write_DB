@@ -2,7 +2,7 @@ import xmlrpc.client
 import base64
 from io import BytesIO
 from PIL import Image
-from PIL import ImageTk
+#from PIL import ImageTk
 import tkinter as tk
 
 #commande a faire pour upgrade pillow 
@@ -193,11 +193,11 @@ class IF_ErpOdoo:
 
 
 if __name__ == "__main__":
-    ifOdoo = IF_ErpOdoo("172.31.10.188", "8069","amaDB", "admin", "adminpython2024")
+    ifOdoo = IF_ErpOdoo("localhost", "8069","amaDB", "admin", "adminpython2024")
     if ifOdoo.connect():
         ifOdoo.getFields()
         ifOdoo.getArticle()
-        result = ifOdoo.update_product_qty(2, 123)
+        result = ifOdoo.update_product_qty(3, 123)
         if result:
             print("Mise à jour de la quantité du produit réussie.")
         else:
