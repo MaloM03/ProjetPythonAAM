@@ -136,7 +136,7 @@ class Application :
     def validate_entry(self):
 
       valeur = self.AjoutProd.get()
-      self.odooRef.update_product_qty(2, 66)
+      self.odooRef.update_stock_quantity_by_default_code(self.selectedID,valeur)
       print("Modified ID :")
       print(self.selectedID)
       print("Valeur emise : ")

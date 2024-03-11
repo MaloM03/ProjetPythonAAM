@@ -261,12 +261,12 @@ class IF_ErpOdoo:
 
 
 if __name__ == "__main__":
-    ifOdoo = IF_ErpOdoo("localhost", "8069","amaDB", "a", "a")
+    ifOdoo = IF_ErpOdoo("localhost", "8069","amaDB", "logistique", "logistiquepython2024")
     if ifOdoo.connect():
         ifOdoo.getFields()
         ifOdoo.getArticle()
         #result = ifOdoo.update_product_qty(3, 123)
-        result = ifOdoo.update_stock_quantity_by_default_code("PEL-OUR-001", 666)
+        result = ifOdoo.update_stock_quantity_by_default_code("PEL-OUR-001", 777)
         if result:
             print("Mise à jour de la quantité du produit réussie.")
         else:

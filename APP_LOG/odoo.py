@@ -122,26 +122,33 @@ class IF_ErpOdoo:
 
             return mo_list
         
-    def update_product_qty(self, product_id, new_qty):
-        """
-        Met à jour la quantité d'un produit dans Odoo.
+    def update_stock_quantity_by_default_code(self, default_code, new_quantity):
+        # Rechercher l'article par le code par défaut
+        product_ids = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                              'product.product', 'search_read',
+                                              [[['default_code', '=', default_code]]],
+                                              {'fields': ['id']})
 
-        :param product_id: L'ID du produit à mettre à jour.
-        :param new_qty: La nouvelle quantité du produit.
-        :return: True si la mise à jour a réussi, False sinon.
-        """
-        if self.mModels is not None:
-            try:
-                # Effectuez la mise à jour de la quantité du produit
-                self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
-                        'product.product', 'write',
-                        [[product_id], {'qty_available': new_qty}])
-                
+        if product_ids:
+            product_id = product_ids[0]['id']
+
+            # Rechercher les enregistrements de stock quant pour l'article
+            stock_quant_ids = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                                       'stock.quant', 'search',
+                                                       [[['product_id', '=', product_id]]])
+
+            if stock_quant_ids:
+                # Mettre à jour la quantité en stock dans chaque enregistrement de stock quant
+                for stock_quant_id in stock_quant_ids:
+                    self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                           'stock.quant', 'write',
+                                           [[stock_quant_id], {'quantity': new_quantity}])
+                print("Stock mis à jour avec succès!")
                 return True
-            except xmlrpc.client.Fault as e:
-                print(f"Erreur lors de la mise à jour de la quantité du produit : {e}")
+            else:
+                print("Aucun enregistrement de stock quant trouvé pour cet article.")
                 return False
         else:
-            print("Veuillez d'abord vous connecter à Odoo.")
+            print("Article non trouvé avec le code par défaut spécifié.")
             return False
 
