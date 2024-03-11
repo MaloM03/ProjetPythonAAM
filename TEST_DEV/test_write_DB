@@ -168,36 +168,105 @@ class IF_ErpOdoo:
                         print(f'----------------------------')
                         print("ok c'est bon 4")
 
-    def update_product_qty(self, product_id, new_qty):
-        """
-        Met à jour la quantité d'un produit dans Odoo.
+    def update_manufacturing_order_qty_producing(self, order_id, new_qty_producing):
 
-        :param product_id: L'ID du produit à mettre à jour.
-        :param new_qty: La nouvelle quantité du produit.
-        :return: True si la mise à jour a réussi, False sinon.
-        """
+        print("update lancé ici")
+        #order_id = 2
         if self.mModels is not None:
             try:
-                # Effectuez la mise à jour de la quantité du produit
+                # Effectuez la mise à jour de la quantité produite de l'ordre de fabrication
                 self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
-                        'product.product', 'write',
-                        [[product_id], {'qty_available': new_qty}])
-                
+                        'mrp.production', 'write',[[order_id], {'qty_producing': new_qty_producing}])
+
                 return True
+                print("write do")
             except xmlrpc.client.Fault as e:
-                print(f"Erreur lors de la mise à jour de la quantité du produit : {e}")
+                print(f"Erreur lors de la mise à jour de la quantité produite de l'ordre de fabrication : {e}")
                 return False
         else:
             print("Veuillez d'abord vous connecter à Odoo.")
             return False
+        print("fin de la function")
+
+    def update_stock_quantity(self, product_id, new_quantity):
+        if self.mModels is not None:
+            try:
+                # Mettre à jour la quantité en stock de l'article
+                self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                       'stock.quant', 'write', [[product_id], {'quantity': new_quantity}])
+                print("Stock mis à jour avec succès!")
+                return True
+            except xmlrpc.client.Fault as e:
+                print(f"Erreur lors de la mise à jour du stock de l'article : {e}")
+                return False
+        else:
+            print("Veuillez d'abord vous connecter à Odoo.")
+            return False
+    '''   
+    def update_stock_quantity_by_default_code(self, default_code, new_quantity):
+        if self.mModels is not None:
+            try:
+                # Rechercher l'ID de l'article par le code par défaut
+                product_ids = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                                     'product.product', 'search', [[['default_code', '=', default_code]]])
+                print("ID trouvé via le default code")
+                print(product_ids)
+                print(product_ids[0])
+                if product_ids:
+                    # Mettre à jour la quantité en stock de l'article
+                    self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                           'stock.quant', 'write', [[{'product_id': product_ids[0]}], {'quantity': new_quantity}])
+                    print("Stock mis à jour avec succès!")
+                    return True
+                else:
+                    print("Article non trouvé avec le code par défaut spécifié.")
+                    return False
+            except xmlrpc.client.Fault as e:
+                print(f"Erreur lors de la mise à jour du stock de l'article : {e}")
+                return False
+        else:
+            print("Veuillez d'abord vous connecter à Odoo.")
+            return False'''
+        
+    def update_stock_quantity_by_default_code(self, default_code, new_quantity):
+        # Rechercher l'article par le code par défaut
+        product_ids = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                              'product.product', 'search_read',
+                                              [[['default_code', '=', default_code]]],
+                                              {'fields': ['id']})
+
+        if product_ids:
+            product_id = product_ids[0]['id']
+
+            # Rechercher les enregistrements de stock quant pour l'article
+            stock_quant_ids = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                                       'stock.quant', 'search',
+                                                       [[['product_id', '=', product_id]]])
+
+            if stock_quant_ids:
+                # Mettre à jour la quantité en stock dans chaque enregistrement de stock quant
+                for stock_quant_id in stock_quant_ids:
+                    self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                           'stock.quant', 'write',
+                                           [[stock_quant_id], {'quantity': new_quantity}])
+                print("Stock mis à jour avec succès!")
+                return True
+            else:
+                print("Aucun enregistrement de stock quant trouvé pour cet article.")
+                return False
+        else:
+            print("Article non trouvé avec le code par défaut spécifié.")
+            return False
+
 
 
 if __name__ == "__main__":
-    ifOdoo = IF_ErpOdoo("localhost", "8069","amaDB", "admin", "adminpython2024")
+    ifOdoo = IF_ErpOdoo("localhost", "8069","amaDB", "a", "a")
     if ifOdoo.connect():
         ifOdoo.getFields()
         ifOdoo.getArticle()
-        result = ifOdoo.update_product_qty(3, 123)
+        #result = ifOdoo.update_product_qty(3, 123)
+        result = ifOdoo.update_stock_quantity_by_default_code("PEL-OUR-001", 666)
         if result:
             print("Mise à jour de la quantité du produit réussie.")
         else:
