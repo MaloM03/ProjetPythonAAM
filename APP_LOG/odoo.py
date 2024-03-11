@@ -102,6 +102,7 @@ class IF_ErpOdoo:
                 print(f'----------------------------')
                 for k in mo_dico.keys():
                     print(f' - {k} : {mo_dico[k]}')
+                    print("Donnees acquise")
             return mo_list
 
     def getImage(self):
@@ -120,4 +121,27 @@ class IF_ErpOdoo:
                     print(f' - {k} : {mo_dico[k]}')
 
             return mo_list
+        
+    def update_product_qty(self, product_id, new_qty):
+        """
+        Met à jour la quantité d'un produit dans Odoo.
+
+        :param product_id: L'ID du produit à mettre à jour.
+        :param new_qty: La nouvelle quantité du produit.
+        :return: True si la mise à jour a réussi, False sinon.
+        """
+        if self.mModels is not None:
+            try:
+                # Effectuez la mise à jour de la quantité du produit
+                self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                        'product.product', 'write',
+                        [[product_id], {'qty_available': new_qty}])
+                
+                return True
+            except xmlrpc.client.Fault as e:
+                print(f"Erreur lors de la mise à jour de la quantité du produit : {e}")
+                return False
+        else:
+            print("Veuillez d'abord vous connecter à Odoo.")
+            return False
 

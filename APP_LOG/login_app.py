@@ -65,15 +65,16 @@ class Connection:
             dataA = ifOdoo.getArticle()
             dataB = ifOdoo.getImage()
             self.prod_app.add_data_to_table(dataA, dataB)
+            self.prod_app.set_odoo(ifOdoo)
             
         else:
             # Création d'une fenêtre d'erreur
             error_window = tk.Toplevel(self.ID)
-            error_window.title("Error")
-            error_window.geometry("200x60+850+350")
+            error_window.title("Erreur de connection")
+            error_window.geometry("400x120+850+350")
 
             # Ajout des éléments à la fenêtre d'erreur
-            error_label = tk.Label(error_window, text="User/Password incorrect")
+            error_label = tk.Label(error_window, text="Vos identifiants sont incorrect \n ou problème de connection au serveur",font=("Arial", 12),padx=0,pady=10)
             error_label.pack()
 
             # Effacement des champs de saisie

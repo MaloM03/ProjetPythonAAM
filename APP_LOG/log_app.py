@@ -20,8 +20,8 @@ class Application :
       # Création des widgets pour l'interface utilisateur
       self.create_widgets()
         
-    def getOdooRef(self):
-      pass
+    def set_odoo(self, currentOdoo):
+        self.odooRef = currentOdoo
      #===== TABLEAU PRODUITS =====
     def create_widgets(self):
       # Création du Treeview (tableau)
@@ -31,9 +31,11 @@ class Application :
         
       self.tree.heading("Nom", text="Nom")
       self.tree.heading("Quantité de stok", text="Quantité de stok")
-      self.tree.heading("Prix àl'unité", text="Prix unitaire")
+      self.tree.heading("Prix àl'unité", text="Prix unitaire €")
       self.tree.heading("Image de ref", text="Image article")
       self.tree.heading("Code article", text="Code article")
+
+      self.tree.bind('<<TreeviewSelect>>', self.on_select) #lier la fonction on_select a la selection de ligne dans le tableau
 
 
       # Ajout des données au tableau
@@ -55,7 +57,7 @@ class Application :
 
      #===== SAISIE DE L'AJOUT DE PRODUCTION=====
         # Ajout du label sous le tableau
-      prod_label = tk.Label(self.logistique, text="Modifié stok")
+      prod_label = tk.Label(self.logistique, text="Modifier le stock de l'article sélectionné :")
       prod_label.grid(row=1, column=0, sticky="w", padx=5, pady=5)
         
         # Ajout du label erreur saisie 
@@ -103,7 +105,7 @@ class Application :
          date = mo_dico['default_code']
          
          # Mettre à jour la liste
-         data[i] = (article, of, (qdp, " euros"), "base64Images", date)
+         data[i] = (article, of, (qdp), "Image article", date)
          i = i + 1
 
          # Efface toutes les lignes actuelles du tableau
@@ -114,12 +116,32 @@ class Application :
             self.tree.insert("", "end", values=item1)
 
      #=====BOUTON DE VALIDATION SAISIE STOK=====
+
+    def on_select(self, event):
+        # Récupère l'élément sélectionné dans le tableau
+        selected_item = self.tree.selection()
+
+        # Vérifie si un élément est effectivement sélectionné
+        if selected_item:
+            # Récupère les valeurs des colonnes de l'élément sélectionné
+            values = self.tree.item(selected_item)['values']
+            self.selectedID = values[4]
+            print("Éléments sélectionnés:", self.selectedID)
+
+            # Extrait le nombre de la chaîne "WH/MO/00006"
+            #self.selected_id = self.extract_number(values[1])
+            #print("Numéro extrait:", self.selected_id)    
             
-            
-    def validate_entry(self): 
-         
-      ModifStok = self.AjoutProd.get()
-    
+    def validate_entry(self):
+
+      valeur = self.AjoutProd.get()
+      self.odooRef.update_product_qty(self.selectedID, 66)
+      print("Modified ID :")
+      print(self.selectedID)
+      print("Valeur emise : ")
+      print(valeur)
+
+      '''
       if ModifStok.isdigit():
          # Fonction appelée lors de la validation du bouton
          self.add_data_to_table()
@@ -134,7 +156,8 @@ class Application :
          prod_labelerror.grid(row=4, column=0)
 
          # Efface la saisie AjoutProd après la validation
-         self.AjoutProd.delete(0, 'end')
+         self.AjoutProd.delete(0, 'end')'''
+    
     
     def refresh(self):
 
