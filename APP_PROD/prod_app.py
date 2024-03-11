@@ -67,6 +67,10 @@ class Application :
         # Ajout du bouton de validation
         validate_button = tk.Button(self.production, text="Valider", command=self.validate_entry)
         validate_button.grid(row=3, column=0, sticky="nsew", padx=5, pady=5)
+
+        # Ajout du bouton refresh
+        refresh_BP = tk.Button(self.production, text="refresh", command=self.refresh)
+        refresh_BP.grid(row=4, column=0, sticky="w", padx=5, pady=5)
         
      #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
     def add_data_to_table(self, OdooData):
@@ -101,11 +105,9 @@ class Application :
         print("Valeur emise : ")
         print(valeur)
 
-        #Actualiser le tableau après une modification
-        self.odooRef.getFields()
-        data = self.odooRef.getManufOrderToDo()
+        self.refresh()
 
-        self.add_data_to_table(data)
+        
 
         #self.AjoutProd.set("")
         #self.AjoutProd.delete(0, "end")
@@ -133,3 +135,10 @@ class Application :
             return int(match.group())
         else:
             return None
+        
+    def refresh(self):
+        #Actualiser le tableau après une modification
+
+        self.odooRef.getFields()
+        data = self.odooRef.getManufOrderToDo()
+        self.add_data_to_table(data)
