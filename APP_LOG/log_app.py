@@ -141,6 +141,7 @@ class Application :
       print(self.selectedID)
       print("Valeur emise : ")
       print(valeur)
+      self.refresh()
 
       '''
       if ModifStok.isdigit():
@@ -162,14 +163,19 @@ class Application :
     
     def refresh(self):
 
+#Actualiser le tableau après une modification
+
+
+
+
           # Fonction appelée lors de la validation du bouton
-      ifOdoo.getFields()
-      dataA = ifOdoo.getArticle()
-      dataB = ifOdoo.getImage()
+      self.odooRef.getFields()
+      dataA = self.odooRef.getArticle()
+      dataB = self.odooRef.getImage()
       self.add_data_to_table(dataA, dataB)
             
             # Efface la saisie AjoutProd après la validation
-      self.AjoutProd.delete(0, 'end')
+      #self.AjoutProd.delete(0, 'end')
 
          #Efface l'erreur de saisie 
-      prod_labelerror.grid_forget()
+      #prod_labelerror.grid_forget()
