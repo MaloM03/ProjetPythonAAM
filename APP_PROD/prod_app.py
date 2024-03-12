@@ -11,7 +11,7 @@ class Application :
     def __init__(self, prod_page, user_name):
         self.selected_id = None
         self.production = prod_page
-        self.production.title("Application Production")
+        self.production.title("AMA - Application Production")
        
         # Définir la taille initiale de la fenêtre
         self.production.geometry("1200x600+750+300")

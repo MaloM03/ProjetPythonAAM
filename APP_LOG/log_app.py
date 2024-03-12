@@ -1,6 +1,7 @@
 import xmlrpc.client
 import tkinter as tk
 from tkinter import ttk
+import center_tk_window
 
 #pour image
 import base64
@@ -16,12 +17,11 @@ class Application :
     def __init__(self, log_page, user_name):
       self.selected_id = None
       self.logistique = log_page
-      self.logistique.title("Application Logistique")
-       
+      self.logistique.title("AMA - Application Logistique")
         # Définir la taille initiale de la fenêtre
       #self.logistique.geometry("1000x300+500+300")
-      self.logistique.geometry("1500x600+1000+600")
-
+      self.logistique.geometry("1500x600+800+400")
+      
       self.AjoutProd = tk.Entry(self.logistique)
         
 
@@ -33,6 +33,7 @@ class Application :
         
      #===== TABLEAU PRODUITS =====
     def create_widgets(self):
+
       # Création du Treeview (tableau)
       self.tree = ttk.Treeview(self.logistique, columns=("Nom", "Quantité de stok", "Prix àl'unité", "Code article"))
 
@@ -60,6 +61,8 @@ class Application :
       # Configuration du redimensionnement de la fenêtre
       self.logistique.grid_rowconfigure(0, weight=1)
       self.logistique.grid_columnconfigure(0, weight=1)
+
+      #center_tk_window.center_on_screen(self.logistique)
 
       # Suppression de la colonne d'ID
       self.tree.column("#0", width=0, stretch=tk.NO)
