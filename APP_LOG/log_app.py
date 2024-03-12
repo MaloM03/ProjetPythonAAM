@@ -92,7 +92,7 @@ class Application :
       # Ajout du bouton voir image
       Photo_BP = tk.Button(self.logistique, text="Voir l'image de l'article", command=self.DisplayImage)
       Photo_BP.grid(row=5, column=0, sticky="w", padx=5, pady=5)
-        
+
      #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
     def add_data_to_table(self, dataA, dataB):
       data = []
