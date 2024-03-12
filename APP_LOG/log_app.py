@@ -5,8 +5,9 @@ from tkinter import ttk
 #=====PAGE D'APPLICATION=====
 class Application : 
     
-     #=====CREATION DE LA PAGE APPLICATION===== 
+  #=====CREATION DE LA PAGE APPLICATION===== 
     def __init__(self, log_page, user_name):
+      self.selected_id = None
       self.logistique = log_page
       self.logistique.title("Application Logistique")
        
@@ -137,13 +138,16 @@ class Application :
 
       valeur = self.AjoutProd.get()
       if valeur.isdigit(): # La valeur est un entier
-        self.odooRef.update_stock_quantity_by_default_code(self.selectedID,valeur)
-        print("Modified ID :")
-        print(self.selectedID)
-        print("Valeur emise : ")
-        print(valeur)
-        self.refresh()
-        self.effacer_ajout_prod()
+        print("pass entier")
+        if self.selectedID is not None:
+          self.odooRef.update_stock_quantity_by_default_code(self.selectedID,valeur)
+          print("Modified ID :")
+          print(self.selectedID)
+          print("Valeur emise : ")
+          print(valeur)
+          self.refresh()
+          self.effacer_ajout_prod()
+          self.selected_id = None
       else:
          print("la valeur n'est pas un entier")
          self.effacer_ajout_prod()
@@ -174,6 +178,7 @@ class Application :
       dataA = self.odooRef.getArticle()
       dataB = self.odooRef.getImage()
       self.add_data_to_table(dataA, dataB)
+      self.effacer_ajout_prod()
             
             # Efface la saisie AjoutProd après la validation
       #self.AjoutProd.delete(0, 'end')

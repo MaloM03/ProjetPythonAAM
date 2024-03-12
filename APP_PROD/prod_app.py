@@ -9,7 +9,7 @@ class Application :
     
      #=====CREATION DE LA PAGE APPLICATION===== 
     def __init__(self, prod_page, user_name):
-        self.selected_id = 0
+        self.selected_id = None
         self.production = prod_page
         self.production.title("Application Production")
        
@@ -102,14 +102,15 @@ class Application :
         # Fonction appelée lors de la validation du bouton
         valeur = self.AjoutProd.get()
         if valeur.isdigit(): # La valeur est un entier
-            self.odooRef.update_manufacturing_order_qty_producing(self.selected_id, valeur)
-            print("Modified ID :")
-            print(self.selected_id)
-            print("Valeur emise : ")
-            print(valeur)
-
-            self.refresh()
-            self.effacer_ajout_prod()
+            if self.selected_id is not None:
+                self.odooRef.update_manufacturing_order_qty_producing(self.selected_id, valeur)
+                print("Modified ID :")
+                print(self.selected_id)
+                print("Valeur emise : ")
+                print(valeur)
+                self.selected_id = None
+                self.refresh()
+                self.effacer_ajout_prod()
         else: # La valeur n'est pas un entier
             print("la valeur n'est pas un entier")
             self.effacer_ajout_prod()
