@@ -28,14 +28,15 @@ class Application :
      #===== TABLEAU PRODUITS =====
     def create_widgets(self):
         # Création du Treeview (tableau)
-        self.tree = ttk.Treeview(self.production, columns=("Nom", "N° OF", "Quantité à produire", "Echéance"))
+        self.tree = ttk.Treeview(self.production, columns=("Nom", "N° OF", "Quantité à produire", "Echéance", "CreateDate"))
 
         # Configuration des colonnes
         
         self.tree.heading("Nom", text="Nom")
         self.tree.heading("N° OF", text="N° OF")
         self.tree.heading("Quantité à produire", text="Nombre d'article réalisé")
-        self.tree.heading("Echéance", text="Echéance")
+        self.tree.heading("Echéance", text="Date de livraison")
+        self.tree.heading("CreateDate", text="Date de création")
       
         self.tree.bind('<<TreeviewSelect>>', self.on_select) #lier la fonction on_select a la selection de ligne dans le tableau
         # Ajout des données au tableau
@@ -82,7 +83,8 @@ class Application :
             QAP = mo_dico['product_qty']
             QDP = mo_dico['qty_producing']
             DATE = mo_dico['date_planned_start']
-            ligne = (Article, OF,(QDP, "/" ,QAP), DATE)
+            CREATION = mo_dico['create_date']
+            ligne = (Article, OF,(QDP, "/" ,QAP), DATE, CREATION)
             data.append(ligne)
 
         #trier des data en fonction de la date prévu de prod
@@ -99,14 +101,19 @@ class Application :
     def validate_entry(self): 
         # Fonction appelée lors de la validation du bouton
         valeur = self.AjoutProd.get()
-        self.odooRef.update_manufacturing_order_qty_producing(self.selected_id, valeur)
-        print("Modified ID :")
-        print(self.selected_id)
-        print("Valeur emise : ")
-        print(valeur)
+        if valeur.isdigit(): # La valeur est un entier
+            self.odooRef.update_manufacturing_order_qty_producing(self.selected_id, valeur)
+            print("Modified ID :")
+            print(self.selected_id)
+            print("Valeur emise : ")
+            print(valeur)
 
-        self.refresh()
-
+            self.refresh()
+            self.effacer_ajout_prod()
+        else: # La valeur n'est pas un entier
+            print("la valeur n'est pas un entier")
+            self.effacer_ajout_prod()
+        
         
 
         #self.AjoutProd.set("")
@@ -142,3 +149,8 @@ class Application :
         self.odooRef.getFields()
         data = self.odooRef.getManufOrderToDo()
         self.add_data_to_table(data)
+        self.effacer_ajout_prod()
+
+    def effacer_ajout_prod(self):
+        """Fonction pour effacer le contenu de la zone de saisie 'AjoutProd'."""
+        self.AjoutProd.delete(0, tk.END)

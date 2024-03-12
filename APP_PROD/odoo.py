@@ -100,7 +100,7 @@ class IF_ErpOdoo:
 
     def getManufOrderToDo(self):
         if self.mModels is not None:
-            fields = ['id','name', 'date_planned_start', 'product_id', 'product_qty', 'qty_producing', 'state']
+            fields = ['id','name', 'date_planned_start', 'product_id', 'product_qty', 'qty_producing', 'create_date']
             limit = 10
             global mo_list
             mo_list = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,

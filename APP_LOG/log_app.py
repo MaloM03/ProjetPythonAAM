@@ -136,12 +136,17 @@ class Application :
     def validate_entry(self):
 
       valeur = self.AjoutProd.get()
-      self.odooRef.update_stock_quantity_by_default_code(self.selectedID,valeur)
-      print("Modified ID :")
-      print(self.selectedID)
-      print("Valeur emise : ")
-      print(valeur)
-      self.refresh()
+      if valeur.isdigit(): # La valeur est un entier
+        self.odooRef.update_stock_quantity_by_default_code(self.selectedID,valeur)
+        print("Modified ID :")
+        print(self.selectedID)
+        print("Valeur emise : ")
+        print(valeur)
+        self.refresh()
+        self.effacer_ajout_prod()
+      else:
+         print("la valeur n'est pas un entier")
+         self.effacer_ajout_prod()
 
       '''
       if ModifStok.isdigit():
@@ -164,10 +169,6 @@ class Application :
     def refresh(self):
 
 #Actualiser le tableau après une modification
-
-
-
-
           # Fonction appelée lors de la validation du bouton
       self.odooRef.getFields()
       dataA = self.odooRef.getArticle()
@@ -179,3 +180,6 @@ class Application :
 
          #Efface l'erreur de saisie 
       #prod_labelerror.grid_forget()
+    def effacer_ajout_prod(self):
+        """Fonction pour effacer le contenu de la zone de saisie 'AjoutProd'."""
+        self.AjoutProd.delete(0, tk.END)
