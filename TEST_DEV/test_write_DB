@@ -2,7 +2,7 @@ import xmlrpc.client
 import base64
 from io import BytesIO
 from PIL import Image
-#from PIL import ImageTk
+from PIL import ImageTk
 import tkinter as tk
 
 #commande a faire pour upgrade pillow 
@@ -257,6 +257,63 @@ class IF_ErpOdoo:
         else:
             print("Article non trouvé avec le code par défaut spécifié.")
             return False
+        
+    def get_image_by_default_code(self, default_code):
+        """Récupère l'image en base64 d'un article à partir de son "default code".
+
+        Args:
+            default_code (str): Le code par défaut de l'article.
+
+        Returns:
+            str: L'image en base64 ou None si une erreur survient ou si l'image est absente.
+        """
+
+        # Rechercher l'ID de l'article par le code par défaut
+        product_ids = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                            'product.product', 'search_read',
+                                            [[['default_code', '=', default_code]]],
+                                            {'fields': ['id', 'image_1920']})
+
+        if product_ids:
+            product_id = product_ids[0]['id']
+
+            # Si l'image est présente, la retourner en base64
+            if product_ids[0]['image_1920']:
+                return product_ids[0]['image_1920']
+
+            else:
+                # Message d'information et retour None
+                print("L'article n'a pas d'image.")
+                return None
+
+        else:
+            # Message d'erreur et retour None
+            print("Article non trouvé avec le code par défaut spécifié.")
+            return None
+        
+    def display_resized_image_article(self,encoded_string, width=128, height=128):
+        # Décode la chaîne base64
+        decoded_bytes = base64.b64decode(encoded_string)
+        
+        # Crée une image à partir des données décodées
+        original_image = Image.open(BytesIO(decoded_bytes))
+        # Redimensionne l'image
+        resized_image = original_image.resize((width, height))
+
+        # Crée une fenêtre Tkinter
+        root = tk.Tk()
+        root.title("Resized Image Decoding")
+
+        # Convertit l'image redimensionnée en format Tkinter
+        global tk_image
+        tk_image = ImageTk.PhotoImage(resized_image)
+
+        # Crée un widget Label pour afficher l'image
+        label = tk.Label(root, image=tk_image)
+        label.pack()
+
+        # Lance la boucle principale Tkinter
+        root.mainloop()
 
 
 
@@ -266,9 +323,8 @@ if __name__ == "__main__":
         ifOdoo.getFields()
         ifOdoo.getArticle()
         #result = ifOdoo.update_product_qty(3, 123)
-        result = ifOdoo.update_stock_quantity_by_default_code("PEL-OUR-001", 777)
-        if result:
-            print("Mise à jour de la quantité du produit réussie.")
-        else:
-            print("Échec de la mise à jour de la quantité du produit")
+        result = ifOdoo.get_image_by_default_code("PEL-OUR-001")
+        print(result)
+        display_resized_image_in_tkinter(result)
+        #ifOdoo.afficher_image_base64(result)
         

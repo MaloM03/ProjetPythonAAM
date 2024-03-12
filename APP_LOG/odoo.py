@@ -151,4 +151,37 @@ class IF_ErpOdoo:
         else:
             print("Article non trouvé avec le code par défaut spécifié.")
             return False
+    
+    def get_image_by_default_code(self, default_code):
+        """Récupère l'image en base64 d'un article à partir de son "default code".
+
+        Args:
+            default_code (str): Le code par défaut de l'article.
+
+        Returns:
+            str: L'image en base64 ou None si une erreur survient ou si l'image est absente.
+        """
+
+        # Rechercher l'ID de l'article par le code par défaut
+        product_ids = self.mModels.execute_kw(self.mErpDB, self.mUser_id, self.mErpPwd,
+                                            'product.product', 'search_read',
+                                            [[['default_code', '=', default_code]]],
+                                            {'fields': ['id', 'image_1920']})
+
+        if product_ids:
+            product_id = product_ids[0]['id']
+
+            # Si l'image est présente, la retourner en base64
+            if product_ids[0]['image_1920']:
+                return product_ids[0]['image_1920']
+
+            else:
+                # Message d'information et retour None
+                print("L'article n'a pas d'image.")
+                return None
+
+        else:
+            # Message d'erreur et retour None
+            print("Article non trouvé avec le code par défaut spécifié.")
+            return None
 

@@ -2,6 +2,13 @@ import xmlrpc.client
 import tkinter as tk
 from tkinter import ttk
 
+#pour image
+import base64
+from io import BytesIO
+from PIL import Image
+from PIL import ImageTk
+
+
 #=====PAGE D'APPLICATION=====
 class Application : 
     
@@ -27,14 +34,14 @@ class Application :
      #===== TABLEAU PRODUITS =====
     def create_widgets(self):
       # Création du Treeview (tableau)
-      self.tree = ttk.Treeview(self.logistique, columns=("Nom", "Quantité de stok", "Prix àl'unité", "Image de ref", "Code article"))
+      self.tree = ttk.Treeview(self.logistique, columns=("Nom", "Quantité de stok", "Prix àl'unité", "Code article"))
 
         # Configuration des colonnes
         
       self.tree.heading("Nom", text="Nom")
       self.tree.heading("Quantité de stok", text="Quantité de stok")
       self.tree.heading("Prix àl'unité", text="Prix unitaire €")
-      self.tree.heading("Image de ref", text="Image article")
+      #self.tree.heading("Image de ref", text="Image article")
       self.tree.heading("Code article", text="Code article")
 
       self.tree.bind('<<TreeviewSelect>>', self.on_select) #lier la fonction on_select a la selection de ligne dans le tableau
@@ -81,6 +88,10 @@ class Application :
         # Ajout du bouton refresh
       refresh_BP = tk.Button(self.logistique, text="refresh", command=self.refresh)
       refresh_BP.grid(row=4, column=0, sticky="w", padx=5, pady=5)
+
+      # Ajout du bouton voir image
+      Photo_BP = tk.Button(self.logistique, text="Voir l'image de l'article", command=self.DisplayImage)
+      Photo_BP.grid(row=5, column=0, sticky="w", padx=5, pady=5)
         
      #=====AFFICHAGE DU TABLEAU DES PRODUITS===== 
     def add_data_to_table(self, dataA, dataB):
@@ -107,7 +118,7 @@ class Application :
          date = mo_dico['default_code']
          
          # Mettre à jour la liste
-         data[i] = (article, of, (qdp), "Image article", date)
+         data[i] = (article, of, (qdp), date)
          i = i + 1
 
          # Efface toutes les lignes actuelles du tableau
@@ -127,7 +138,7 @@ class Application :
         if selected_item:
             # Récupère les valeurs des colonnes de l'élément sélectionné
             values = self.tree.item(selected_item)['values']
-            self.selectedID = values[4]
+            self.selectedID = values[3]
             print("Éléments sélectionnés:", self.selectedID)
 
             # Extrait le nombre de la chaîne "WH/MO/00006"
@@ -188,3 +199,31 @@ class Application :
     def effacer_ajout_prod(self):
         """Fonction pour effacer le contenu de la zone de saisie 'AjoutProd'."""
         self.AjoutProd.delete(0, tk.END)
+
+    def DisplayImage(self):
+       ImageEnBase64 = self.odooRef.get_image_by_default_code(self.selectedID)
+       self.display_resized_image_article(ImageEnBase64)
+
+    def display_resized_image_article(self,encoded_string, width=256, height=256):
+        # Décode la chaîne base64
+        decoded_bytes = base64.b64decode(encoded_string)
+        
+        # Crée une image à partir des données décodées
+        original_image = Image.open(BytesIO(decoded_bytes))
+        # Redimensionne l'image
+        resized_image = original_image.resize((width, height))
+
+        # Crée une fenêtre Tkinter
+        root = tk.Tk()
+        root.title("Visualisation de l'image")
+
+        # Convertit l'image redimensionnée en format Tkinter
+        global tk_image
+        tk_image = ImageTk.PhotoImage(resized_image)
+
+        # Crée un widget Label pour afficher l'image
+        label = tk.Label(root, image=tk_image)
+        label.pack()
+
+        # Lance la boucle principale Tkinter
+        root.mainloop()
