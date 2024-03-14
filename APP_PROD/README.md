@@ -1,6 +1,10 @@
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 ## __Metode 1__  
+- Ouvrir login_app avec Bloc-notes  
+  chemain d'acces : C:\Users\UIMM\Desktop\Python_AMA.sh\APP_PROD\login_app
+- Mettre la bonne adresse IP d'Odoo à la ligne 55
+
 - Lancer le fichier Setup_prod  
   chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\Steup_prod
 - Accepter le pare-feu
