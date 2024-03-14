@@ -80,10 +80,12 @@ Valider puis attendre l'instalation des deux conteneurs odoo et base de données
 http://0.0.0.0:8069
 ```
 ## Mise en place la base de données sur odoo
-Aller sur la page de connection odoo via http://0.0.0.0:8069:
-Cliquer sur base de données odoo  
+Aller sur la page de connection odoo via: http://0.0.0.0:8069
+Cliquer sur la base de données odoo  
 ![photo bouton base de données odoo](Image_README/image01.png)  
-Cliquer sur 'Gestion des bases de données Odoo' et restorer la base de données à l'aide du dossier ZIP 'amaDB_X'  
+Cliquer sur 'Gestion des bases de données Odoo' et restorer la base de données à l'aide du dossier ZIP 'amaDB_X'
+![photo bouton base de données odoo](Image_README/image02.png)  
+![photo bouton base de données odoo](Image_README/image03.png)  
 
 ## Mettre un contonneur en démarrage automatique dès le lancement de docker
 Exemple pour portainer
