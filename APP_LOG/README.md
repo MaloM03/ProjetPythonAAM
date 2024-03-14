@@ -1,5 +1,5 @@
 ## 1 / Instalation Python
-__Aller dans la konsole et entrer ces commandes__   
+__Aller dans la console et entrer ces commandes__   
 
 ```bash
 sudo apt update
@@ -42,7 +42,7 @@ sudo apt-get install python3-pil.imagetk
 - Mettre la bonne adresse IP Oddo ligne 59
 
 ## 4 / Lancer l'application production
-__Aller dans la konsole et entrer ces commandes__   
+__Aller dans la console et entrer ces commandes__      
 
 ```bash
 cd /home/user/Bureau/Dos_python_del_mama/ProjetPythonAAM/APPP_LOG/
