@@ -11,6 +11,7 @@ Cocher la case Add Python 3.9 to PATH
 ![Cocher la case Add Python 3.9 to PATH](Image_README/MicrosoftTeams-image-2.png)
 
 Cliquer sur Install New
+
 ![Cliquer sur Install New](Image_README/MicrosoftTeams-image-2.png)
 ```bash
 'Accepter le par feu'
