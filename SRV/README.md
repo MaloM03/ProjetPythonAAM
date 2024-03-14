@@ -1,23 +1,23 @@
 
 # Configuration du serveur
+Installation du serveur Odoo sur le PC 1 (Linux)
 
-Nous devons créer sur une VM linux (debian) avec Docke avec les conteneurs Portainer, Odoo et postgresql.
-
-
-# 1/ Configuration du réseaux de la VM
-Connecter la VM au réseaux WIFI GUEST  
-Dans la configuration du réseaux de la VM configurer le reseaux en NAT. et ouvrez les ports 8069:  
+## 1/ Configuration du réseaux de la VM
+Vérifier si la VM est bien connecté au réseaux WIFI GUEST 
+Vérifier la configuration du reseaux de la VM.  
+Reseaux en NAT  
+Ouvertures des ports 8069  
 ![ouverture port](Image_README/image06.png)
 ![ouverture port](Image_README/image07.png)
-## 1/ Mise en place de docker sur la VM linux debian 11
+## 2/ Mise en place de docker sur la VM linux debian 11
 Vérifier si docker est pas déja installé sur la VM.
 
 ```bash
 docker --version
 ```
-Si docker existe déja passer à l'étape X. Sinon suivre les instrcutions ci-dessous.
+Si docker existe déja passer à l'étape 3. Sinon suivre les instrcutions ci-dessous.
 ## Instalation des dépendances 
-Dans la console mettre les commandes suivantes:
+Dans la console mettre les commandes suivantes pour installer les dépendance :
 ```bash
 sudo apt-get update
 ```
@@ -46,8 +46,8 @@ sudo systemctl status docker
 ```bash
 docker --version
 ```
-## 2/ Installation de Portainer (interface graphique pour docker)
-## Mise en place du conteneur Portainer
+## 3/ Installation de Portainer (interface graphique pour docker)
+Mise en place du conteneur Portainer sur docker
 ```bash
 docker run -d -p 9000:9000 --name portainer \
     --restart=always \
@@ -55,13 +55,11 @@ docker run -d -p 9000:9000 --name portainer \
     -v portainer_data:/data \
     portainer/portainer-ce:latest
 ```
-Verifier que portainer soit bien installé en allant sur :
-```bash
-http://0.0.0.0:9000
-```
+Verifier que portainer soit bien installé en allant sur : http://0.0.0.0:9000  
+
 ## 3/ Installation du stack odoo sur docker
-Allez sur portainer via : http://0.0.0.0:9000 et installer le stack suivant
-créer un stack du nom de odoo70 en mettant la config suivante:
+Allez sur portainer via : http://0.0.0.0:9000 et installer le stack suivant  
+créer un stack du nom de odoo70 en mettant la config suivante:  
 ```yml
 version: '2'
 services:
@@ -82,10 +80,9 @@ services:
       - POSTGRES_PASSWORD=myodoo
       - POSTGRES_USER=odoo
 ```
-Valider puis attendre l'instalation des deux conteneurs odoo et base de données puis aller sur pour vérifier l'installation de portainer:
-```bash
-http://0.0.0.0:8069
-```
+Valider puis attendre (environ 2min) l'installation des deux conteneurs odoo et postgreSQL vérifier la présence des deux conteneurs sur portainer.  
+Vérifier l'accès au serveur Odoo en allant sur : http://0.0.0.0:8069   
+
 ## 4/ Mise en place la base de données sur odoo
 Aller sur la page de connection odoo via: http://0.0.0.0:8069
 Cliquer sur restore database
@@ -93,9 +90,3 @@ Cliquer sur restore database
 
 Remplir le mdp, le nom de la base de données et chosir le fichier ZIP puis importer la base de données
 ![photo bouton base de données odoo](Image_README/image05.png)  
- 
-
-## 5/ Mettre un contenneur en démarrage automatique dès le lancement de docker
-Exemple pour portainer
-```bash
-sudo docker update --restart=always portainer
