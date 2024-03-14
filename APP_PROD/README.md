@@ -26,15 +26,15 @@ Accepter le par feu
 pythonC:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\main.py  
 
 
-## 3 / Changer l'IP
+## 4 / Changer l'IP
 - Ouvrire login_app  
   chemain d'acces : C:\Users\UIMM\Desktop\Python_AMA.sh\APP_PROD\login_app
 
 - Mettre la bonne adresse IP Oddo ligne 55
 
-## 4 / Lancer l'application production
+## 5 / Lancer l'application production
 __Aller dans la konsole et entrer ces commandes__   
 
 ```bash
-pythonC:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\main.py
+\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\main.py
 ```
