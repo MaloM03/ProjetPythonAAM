@@ -1,3 +1,19 @@
+-------------------------------------------------------------
+-------------------------------------------------------------
+
+## __METODE 1__
+- Ouvrire login_app  avec Bloc-notes
+  chemain d'acces : /home/user/Bureau/Dos_python_del_mama/ProjetPythonAAM/APPP_LOG/
+- Mettre la bonne adresse IP Oddo ligne 59
+
+- Lancer le fichier Setup_log  
+  chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_LOG\Steup_log
+- Accepter le pare-feu
+- 
+-------------------------------------------------------------
+-------------------------------------------------------------
+## __METODE 2__
+
 ## 1 / Instalation Python
 __Aller dans la console et entrer ces commandes__   
 
@@ -50,3 +66,5 @@ cd /home/user/Bureau/Dos_python_del_mama/ProjetPythonAAM/APPP_LOG/
 ```bash
 python3 main.py
 ```
+-------------------------------------------------------------
+-------------------------------------------------------------
