@@ -6,7 +6,7 @@ Nous devons créer sur une VM linux (debian) avec Docke avec les conteneurs Port
 
 # 1/ Configuration du réseaux de la VM
 Connecter la VM au réseaux WIFI GUEST  
-Dans la configuration du réseaux de la VM configurer le reseaux en NAT. et ouvrez les ports 8069:
+Dans la configuration du réseaux de la VM configurer le reseaux en NAT. et ouvrez les ports 8069:  
 ![ouverture port]()
 ![ouverture port]()
 ## 1/ Mise en place de docker sur la VM linux debian 11
