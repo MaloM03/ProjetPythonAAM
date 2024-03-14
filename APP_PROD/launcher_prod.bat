@@ -1,1 +1,4 @@
-python3 main.py
+@echo off
+
+rem Exécutez l'application Python
+python main.py
