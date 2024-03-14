@@ -6,7 +6,8 @@ Installation du serveur Odoo sur le PC 1 (Linux)
 Vérifier si la VM est bien connecté au réseaux WIFI GUEST 
 Vérifier la configuration du reseaux de la VM.  
  - Reseaux en NAT  
- - Ouvertures des ports 8069  
+ - Ouvertures des ports 8069
+  
 ![ouverture port](Image_README/image06.png)
 ![ouverture port](Image_README/image07.png)
 ## 2/ Mise en place de docker sur la VM linux debian 11
