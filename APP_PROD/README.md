@@ -1,3 +1,10 @@
+
+## __1 / Metode 1__  
+- Lancer le fichier Setup_prod  
+  chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\Steup_prod
+- Accepter le pare-feu
+
+## __2/ Metode 2__
 ## 1 / Instalation Python
 __Aller dans la console et entrer ces commandes__   
 
