@@ -6,7 +6,9 @@ Nous devons créer sur une VM linux (debian) avec Docke avec les conteneurs Port
 
 # 1/ Configuration du réseaux de la VM
 Connecter la VM au réseaux WIFI GUEST  
-Dans la configuration du réseaux
+Dans la configuration du réseaux de la VM configurer le reseaux en NAT. et ouvrez les ports 8069:
+![ouverture port]()
+![ouverture port]()
 ## 1/ Mise en place de docker sur la VM linux debian 11
 Vérifier si docker est pas déja installé sur la VM.
 
@@ -91,6 +93,8 @@ Cliquer sur la base de données odoo
 Cliquer sur 'Gestion des bases de données Odoo' et restorer la base de données à l'aide du dossier ZIP 'amaDB_X'
 ![photo bouton base de données odoo](Image_README/image02.png)  
 ![photo bouton base de données odoo](Image_README/image03.png)  
+
+
 
 ## 5/ Mettre un contenneur en démarrage automatique dès le lancement de docker
 Exemple pour portainer
