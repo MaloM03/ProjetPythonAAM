@@ -1,4 +1,4 @@
-## Instalation Python
+## 1 / Instalation Python
 ```bash
 curl -O https://www.python.org/ftp/python/3.9.3/python-3.9.3-amd64.exe
 ```
@@ -20,7 +20,7 @@ __Cliquer sur Install New__
 ----------------------------------------------------------------------------------  
 Accepter le par feu
 
-## Lancer l'application production
+## 2 / Lancer l'application production
 ```bash
 pythonC:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\main.py
 ```
