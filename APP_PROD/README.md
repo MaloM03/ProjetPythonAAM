@@ -50,3 +50,5 @@ __Aller dans la console et entrer ces commandes__
 ```bash
 \Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\main.py
 ```
+----------------------------------------------------------------------------------
+----------------------------------------------------------------------------------
