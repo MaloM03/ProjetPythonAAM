@@ -2,8 +2,8 @@
 -------------------------------------------------------------
 
 ## __METODE 1__
-- Ouvrire login_app  avec Bloc-notes
-  chemain d'acces : /home/user/Bureau/Dos_python_del_mama/ProjetPythonAAM/APPP_LOG/
+- installer le dossier d'installe sur le bureau
+- Ouvrire login_app dans le dossier log avec Bloc-notes
 - Mettre la bonne adresse IP Oddo ligne 59
 
 - Lancer le fichier Setup_log  
@@ -14,7 +14,9 @@
 -------------------------------------------------------------
 ## __METODE 2__
 
-## 1 / Instalation Python
+## 1 / __installer le dossier d'installe sur le bureau__
+
+## 2 / Instalation Python
 __Aller dans la console et entrer ces commandes__   
 
 ```bash
@@ -46,18 +48,17 @@ cd ..
 rm -rf Python-3.9.2 Python-3.9.2.tgz
 ```
 
-## 2 / Installer PILLOW
+## 3 / Installer PILLOW
 ```bash
 sudo apt-get install python3-pil.imagetk
 ```
 
-## 3 / Changer l'IP
+## 4 / Changer l'IP
 - Ouvrire login_app  avec Bloc-notes
-  chemain d'acces : /home/user/Bureau/Dos_python_del_mama/ProjetPythonAAM/APPP_LOG/  
 
 - Mettre la bonne adresse IP Oddo ligne 59
 
-## 4 / Lancer l'application production
+## 5 / Lancer l'application production
 __Aller dans la console et entrer ces commandes__      
 
 ```bash
