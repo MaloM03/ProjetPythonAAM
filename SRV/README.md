@@ -84,7 +84,7 @@ Cliquer sur 'Gestion des bases de données Odoo' et restorer la base de données
 ![photo bouton base de données odoo](Image_README/image02.png)  
 ![photo bouton base de données odoo](Image_README/image03.png)  
 
-## 5/ Mettre un contonneur en démarrage automatique dès le lancement de docker
+## 5/ Mettre un contenneur en démarrage automatique dès le lancement de docker
 Exemple pour portainer
 ```bash
 sudo docker update --restart=always portainer
