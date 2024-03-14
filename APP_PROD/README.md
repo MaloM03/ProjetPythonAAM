@@ -22,9 +22,10 @@ __Cliquer sur Install New__
 ----------------------------------------------------------------------------------  
 Accepter le par feu
 
-## 3 / Installer PILOW
-pythonC:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\main.py  
-
+## 3 / Installer PILLOW
+```bash
+pip install pillow
+```
 
 ## 4 / Changer l'IP
 - Ouvrire login_app  
