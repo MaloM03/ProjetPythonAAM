@@ -1,4 +1,6 @@
 ## 1 / Instalation Python
+__Aller dans la konsole et entrer ces commandes__   
+
 ```bash
 curl -O https://www.python.org/ftp/python/3.9.3/python-3.9.3-amd64.exe
 ```
