@@ -1,7 +1,7 @@
 -------------------------------------------------------------
 -------------------------------------------------------------
 
-## __METODE 1__
+## __METHODE 1__
 - installer le dossier d'installe sur le bureau
 - Ouvrire login_app dans le dossier log avec Bloc-notes
 - Mettre la bonne adresse IP Oddo ligne 59
@@ -12,7 +12,7 @@
 
 -------------------------------------------------------------
 -------------------------------------------------------------
-## __METODE 2__
+## __METHODE 2__
 
 ## 1 / __installer le dossier d'installe sur le bureau__
 
