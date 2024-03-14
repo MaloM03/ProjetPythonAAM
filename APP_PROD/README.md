@@ -22,6 +22,10 @@ __Cliquer sur Install New__
 ----------------------------------------------------------------------------------  
 Accepter le par feu
 
+## 3 / Installer PILOW
+pythonC:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\main.py  
+
+
 ## 3 / Changer l'IP
 - Ouvrire login_app  
   chemain d'acces : C:\Users\UIMM\Desktop\Python_AMA.sh\APP_PROD\login_app
