@@ -4,8 +4,16 @@
 Nous devons créer sur une VM linux (debian) avec Docke avec les conteneurs Portainer, Odoo et postgresql.
 
 
+# 1/ Configuration du réseaux de la VM
+Connecter la VM au réseaux WIFI GUEST  
+Dans la configuration du réseaux
 ## 1/ Mise en place de docker sur la VM linux debian 11
+Vérifier si docker est pas déja installé sur la VM.
 
+```bash
+docker --version
+```
+Si docker existe déja passer à l'étape X. Sinon suivre les instrcutions ci-dessous.
 ## Instalation des dépendances 
 Dans la console mettre les commandes suivantes:
 ```bash
