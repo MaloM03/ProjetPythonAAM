@@ -6,7 +6,7 @@
 - Mettre la bonne adresse IP d'Odoo à la ligne 55
 
 - Lancer le fichier Setup_prod  
-  chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\Steup_prod
+  chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\setup_prod.bat
 - Accepter le pare-feu
 
 ----------------------------------------------------------------------------------
