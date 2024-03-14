@@ -15,5 +15,4 @@ cd ..
 rm -rf Python-3.9.2 Python-3.9.2.tgz
 sudo apt-get install python3-pil.imagetk
 
-cd /home/user/Bureau/ProjetPythonAAM-main/APP_LOG
-python3 main.py
+
