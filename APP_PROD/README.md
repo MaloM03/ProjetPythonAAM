@@ -1,8 +1,7 @@
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 ## __Metode 1__  
-- Ouvrir login_app avec Bloc-notes  
-  chemain d'acces : C:\Users\UIMM\Desktop\Python_AMA.sh\APP_PROD\login_app
+- Ouvrir login_app du dossier PROD avec Bloc-notes 
 - Mettre la bonne adresse IP d'Odoo à la ligne 55
 
 - Lancer le fichier Setup_prod  
@@ -44,7 +43,6 @@ pip install pillow
 
 ## 4 / Changer l'IP
 - Ouvrir login_app avec Bloc-notes  
-  chemain d'acces : C:\Users\UIMM\Desktop\Python_AMA.sh\APP_PROD\login_app
 
 - Mettre la bonne adresse IP d'Odoo à la ligne 55
 
