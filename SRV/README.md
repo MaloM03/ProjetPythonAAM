@@ -91,3 +91,8 @@ Cliquer sur restore database
 
 Remplir le mdp, le nom de la base de données et chosir le fichier ZIP puis importer la base de données
 ![photo bouton base de données odoo](Image_README/image05.png)  
+
+Connecter vous sur odoo via :
+ - email : admin  
+ - mdp : adminpython2024  
+Vérifier l'apparition des articles sur la page web odoo. Pour valider la mise en place de la base de données.
