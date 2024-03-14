@@ -1,16 +1,12 @@
 
-# 1 / Configuration du serveur
+# Configuration du serveur
 
 Nous devons créer sur une VM linux (debian) avec Docke avec les conteneurs Portainer, Odoo et postgresql.
 
 
-## 2 / Mise en place de docker sur la VM linux debian 11
+## 1/ Mise en place de docker sur la VM linux debian 11
 
-
-
-
-
-## 3 / Instalation des dépendances 
+## Instalation des dépendances 
 Dans la console mettre les commandes suivantes:
 ```bash
 sudo apt-get update
@@ -18,7 +14,7 @@ sudo apt-get update
 ```bash
 sudo apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common
 ```
-## 4 / Ajouter le dépôt officiel Docker
+## Ajouter le dépôt officiel Docker
 ```bash
 sudo curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 ```
@@ -28,20 +24,20 @@ sudo echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.
 ```bash
 sudo apt-get update
 ```
-## 5 / Installation des paquets Docker
+## Installation des paquets Docker
 ```bash
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
-## 6/ Tester si docker est bien installé
+## Tester si docker est bien installé
 ```bash
 sudo systemctl status docker
 ```
-## 7/ Vérifier la version de docker
+## Vérifier la version de docker
 ```bash
 docker --version
 ```
-## 8 / Instalation de Portainer (interface graphique pour docker)
-## 9 / Mise en place du conteneur Portainer
+## 2/ Instalation de Portainer (interface graphique pour docker)
+## Mise en place du conteneur Portainer
 ```bash
 docker run -d -p 9000:9000 --name portainer \
     --restart=always \
@@ -53,7 +49,7 @@ Verifier que portainer soit bien installé en allant sur :
 ```bash
 http://0.0.0.0:9000
 ```
-## 10 / Installation du stack odoo sur docker
+## 3/ Installation du stack odoo sur docker
 créer un stack du nom de odoo70 en mettant la config suivante:
 ```yml
 version: '2'
@@ -79,7 +75,7 @@ Valider puis attendre l'instalation des deux conteneurs odoo et base de données
 ```bash
 http://0.0.0.0:8069
 ```
-## 11 / Mise en place la base de données sur odoo
+## 4/ Mise en place la base de données sur odoo
 Aller sur la page de connection odoo via: http://0.0.0.0:8069
 Cliquer sur la base de données odoo  
 ![photo bouton base de données odoo](Image_README/image01.png)  
@@ -87,7 +83,7 @@ Cliquer sur 'Gestion des bases de données Odoo' et restorer la base de données
 ![photo bouton base de données odoo](Image_README/image02.png)  
 ![photo bouton base de données odoo](Image_README/image03.png)  
 
-## Mettre un contonneur en démarrage automatique dès le lancement de docker
+## 5/ Mettre un contonneur en démarrage automatique dès le lancement de docker
 Exemple pour portainer
 ```bash
 sudo docker update --restart=always portainer
