@@ -9,7 +9,7 @@
 - Lancer le fichier Setup_log  
   chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_LOG\Steup_log
 - Accepter le pare-feu
-- 
+
 -------------------------------------------------------------
 -------------------------------------------------------------
 ## __METODE 2__
