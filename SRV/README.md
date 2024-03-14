@@ -11,7 +11,7 @@ Nous devons créer sur une VM linux (debian) avec Docke avec les conteneurs Port
 
 
 ## Instalation des dépendances 
-
+Dans la console mettre les commandes suivantes:
 ```bash
 sudo apt-get update
 ```
@@ -53,7 +53,7 @@ Verifier que portainer soit bien installé en allant sur :
 ```bash
 http://0.0.0.0:9000
 ```
-## Instalation du stack odoo sur docker
+## Installation du stack odoo sur docker
 créer un stack du nom de odoo70 en mettant la config suivante:
 ```yml
 version: '2'
@@ -79,7 +79,10 @@ Valider puis attendre l'instalation des deux conteneurs odoo et base de données
 ```bash
 http://0.0.0.0:8069
 ```
-## Mettre en place la base de données sur odoo
+## Mise en place la base de données sur odoo
+Aller sur la page de connection odoo via http://0.0.0.0:8069:
+Cliquer sur base de données odoo
+![photo bouton base de données odoo](Image_README/image01.png)
 Cliquer sur 'Gestion des bases de données Odoo' et restorer la base de données à l'aide du dossier ZIP 'amaDB_X'
 
 ## Mettre un contonneur en démarrage automatique dès le lancement de docker
