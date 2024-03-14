@@ -7,7 +7,7 @@
 - Mettre la bonne adresse IP Oddo ligne 59
 
 - Lancer le fichier Setup_log  
-  chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_LOG\Steup_log
+  chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_LOG\Steup_log.bat
 - Accepter le pare-feu
 
 -------------------------------------------------------------
