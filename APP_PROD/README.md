@@ -29,6 +29,8 @@ Accepter le par feu
 - Mettre la bonne adresse IP Oddo ligne 55
 
 ## 4 / Lancer l'application production
+__Aller dans la konsole et entrer ces commandes__   
+
 ```bash
 pythonC:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\main.py
 ```
