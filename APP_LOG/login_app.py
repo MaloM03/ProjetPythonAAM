@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import ttk
 import xmlrpc.client
 from odoo import *
-import center_tk_window
 
 class Connection:
     def __init__(self, connection_page, prod_page, prod_app):
@@ -43,11 +42,7 @@ class Connection:
         self.password_entry.bind("<Return>", self.validation)
 
         bp_validation = tk.Button(self.ID,text="Connection",font=("Arial", 16),padx=0,pady=0,command=self.connection)
-        bp_validation.pack()
-
-        center_tk_window.center_on_screen(self.ID)
-
-        
+        bp_validation.pack()      
 
     def validation(self, event):
         self.connection()
