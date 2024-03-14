@@ -20,7 +20,13 @@ __Cliquer sur Install New__
 ----------------------------------------------------------------------------------  
 Accepter le par feu
 
-## 2 / Lancer l'application production
+## 3 / Changer l'IP
+- Ouvrire login_app  
+  chemain d'acces : C:\Users\UIMM\Desktop\Python_AMA.sh\APP_PROD\login_app
+
+- Mettre la bonne adresse IP Oddo ligne 55
+
+## 4 / Lancer l'application production
 ```bash
 pythonC:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\main.py
 ```
