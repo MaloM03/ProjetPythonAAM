@@ -79,6 +79,8 @@ Valider puis attendre l'instalation des deux conteneurs odoo et base de données
 ```bash
 http://0.0.0.0:8069
 ```
+## Mettre en place la base de données sur odoo
+Cliquer sur 'Gestion des bases de données Odoo' et restorer la base de données à l'aide du dossier ZIP 'amaDB_X'
 
 ## Mettre un contonneur en démarrage automatique dès le lancement de docker
 Exemple pour portainer
