@@ -16,4 +16,4 @@ python-3.9.3-amd64.exe
 ```bash
 'Accepter le par feu'
 ```
-![Cliquer sur Install New](APP_PROD/Image_README/MicrosoftTeams-image-1.png)
+!(APP_PROD/Image_README/MicrosoftTeams-image-1.png)
