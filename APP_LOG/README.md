@@ -28,12 +28,14 @@ cd ..
 rm -rf Python-3.9.2 Python-3.9.2.tgz
 ```
 
-## 2 / Lancer l'application production
+## 2 /Installer PILO
+```bash
+sudo apt-get install python3-pil.imagetk
+```
+
+## 3 / Lancer l'application production
 ```bash
 cd /home/user/Bureau/Dos_python_del_mama/ProjetPythonAAM/APPP_LOG/
-```
-```bash
-python main.py
 ```
 ```bash
 python3 main.py
