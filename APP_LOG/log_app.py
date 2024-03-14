@@ -1,7 +1,6 @@
 import xmlrpc.client
 import tkinter as tk
 from tkinter import ttk
-import center_tk_window
 
 #pour image
 import base64
@@ -61,8 +60,6 @@ class Application :
       # Configuration du redimensionnement de la fenêtre
       self.logistique.grid_rowconfigure(0, weight=1)
       self.logistique.grid_columnconfigure(0, weight=1)
-
-      #center_tk_window.center_on_screen(self.logistique)
 
       # Suppression de la colonne d'ID
       self.tree.column("#0", width=0, stretch=tk.NO)
