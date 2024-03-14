@@ -34,8 +34,8 @@ sudo apt-get install python3-pil.imagetk
 ```
 
 ## 3 / Changer l'IP
-Ouvrire login_app
-Chemain d'acces : C:\Users\UIMM\Desktop\Python_AMA.sh\APP_LOG\login_app.py
+Ouvrire login_app  
+Chemain d'acces : C:\Users\UIMM\Desktop\Python_AMA.sh\APP_LOG\login_app.py  
 
 Mettre la bonne adresse IP Oddo ligne 59
 
