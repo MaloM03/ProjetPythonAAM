@@ -28,7 +28,7 @@ cd ..
 rm -rf Python-3.9.2 Python-3.9.2.tgz
 ```
 
-## 2 /Installer PILO
+## 2 /Installer PILOW
 ```bash
 sudo apt-get install python3-pil.imagetk
 ```
