@@ -1,6 +1,7 @@
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 ## __Metode 1__  
+- Installer le dossier d'installe sur le Bureau
 - Ouvrir login_app du dossier PROD avec Bloc-notes 
 - Mettre la bonne adresse IP d'Odoo à la ligne 55
 
@@ -12,7 +13,9 @@
 ----------------------------------------------------------------------------------
 ## __Metode 2__
 
-## 1 / Instalation Python
+## 1 / Installer le dossier sur le Bureau
+
+## 2 / Instalation Python
 __Aller dans la console et entrer ces commandes__   
 
 ```bash
