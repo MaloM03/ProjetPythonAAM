@@ -52,7 +52,7 @@ class Connection:
         user_name = self.user_entry.get()
         password = self.password_entry.get()
        
-        ifOdoo = IF_ErpOdoo("localhost", "8069","amaDB", user_name, password)
+        ifOdoo = IF_ErpOdoo("172.31.10.20", "8069","amaDB", user_name, password)
         if ifOdoo.connect():
             self.prod_app.set_odoo(ifOdoo)
             # Fermeture auto de la fenêtre de connexion
