@@ -2,15 +2,16 @@
 -------------------------------------------------------------
 
 ## __METHODE 1__ (Automatique)
-- Mettre le dossier d'installation sur le bureau (APP LOGISTIQUE)
-- Ouvrir login_app.py dans le dossier log avec Bloc-notes pour modifier l'adresse IP
-- Mettre la bonne adresse IP Oddo ligne 59 (adresse IP de la machine physique du serveur odoo)
+- Mettre le dossier d'installation sur le bureau (APP LOGISTIQUE)  
+- Ouvrir login_app.py dans le dossier log avec Bloc-notes pour modifier l'adresse IP  
+- Mettre la bonne adresse IP Oddo ligne 59 (adresse IP de la machine physique du serveur odoo)  
 
-- Lancer le fichier Setup_log avec la commande cmd ./bash setup_log.sh
-  chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_LOG\setup_log.sh
-- Accepter le pare-feu
+- Ouvrez un terminal à l'emplacement du dossier  
+- Lancer le fichier Setup_log avec la commande cmd ./bash setup_log.sh  
 
-- Après l'installation lancer le fichier launcher_log.sh avec la commande ./bash launcher_log.sh
+- Accepter le pare-feu  
+
+- Après l'installation lancer le fichier launcher_log.sh avec la commande ./bash launcher_log.sh  
 
 -------------------------------------------------------------
 -------------------------------------------------------------
