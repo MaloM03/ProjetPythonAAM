@@ -1,18 +1,20 @@
 -------------------------------------------------------------
 -------------------------------------------------------------
 
-## __METHODE 1__
-- installer le dossier d'installe sur le bureau
-- Ouvrire login_app dans le dossier log avec Bloc-notes
-- Mettre la bonne adresse IP Oddo ligne 59
+## __METHODE 1__ (Automatique)
+- Installer le dossier d'installe sur le bureau
+- Ouvrir login_app.py dans le dossier log avec Bloc-notes pour modifier l'adresse IP
+- Mettre la bonne adresse IP Oddo ligne 59 (adresse IP de la machine physique du serveur odoo)
 
-- Lancer le fichier Setup_log  
-  chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_LOG\Steup_log.bat
+- Lancer le fichier Setup_log avec la commande cmd ./bash setup_log.sh
+  chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_LOG\setup_log.sh
 - Accepter le pare-feu
 
+- Après l'installation lancer le fichier launcher_log.sh avec la commande ./bash launcher_log.sh
+
 -------------------------------------------------------------
 -------------------------------------------------------------
-## __METHODE 2__
+## __METHODE 2__ (Manuel)
 
 ## 1 / __installer le dossier d'installe sur le bureau__
 
@@ -56,7 +58,7 @@ sudo apt-get install python3-pil.imagetk
 ## 4 / Changer l'IP
 - Ouvrire login_app  avec Bloc-notes
 
-- Mettre la bonne adresse IP Oddo ligne 59
+- Mettre la bonne adresse IP Oddo ligne 59 (adresse IP de la machine physique du serveur odoo)
 
 ## 5 / Lancer l'application production
 __Aller dans la console et entrer ces commandes__      
