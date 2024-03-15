@@ -1,13 +1,12 @@
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
 ## __METHODE 1__ (Automatique)
-- Installer le dossier d'installe sur le Bureau
-- Ouvrir login_app du dossier PROD avec Bloc-notes 
-- Mettre la bonne adresse IP d'Odoo à la ligne 55
-
-- Lancer le fichier Setup_prod  
-  chemaind'accès : C:\Users\UIMM\Desktop\ProjetPythonAAM-main\APP_PROD\setup_prod.bat
-- Accepter le pare-feu
+- Mettre le dossier d'installation sur le bureau (APP PRODUCTION)  
+- Ouvrir login_app.py dans le dossier prod avec Bloc-notes pour modifier l'adresse IP  
+- Mettre la bonne adresse IP d'Odoo à la ligne 55 (adresse IP de la machine physique du serveur odoo)  
+- Ouvrez un terminal à l'emplacement du dossier  
+- Lancer le fichier setup_prod avec la commande cmd ./bash setup_prod.sh  
+- Après l'installation lancer le fichier launcher_prod.sh avec la commande ./bash launcher_prod.sh  
 
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
