@@ -2,7 +2,7 @@
 -------------------------------------------------------------
 
 ## __METHODE 1__ (Automatique)
-- Installer le dossier d'installe sur le bureau
+- Mettre le dossier d'installation sur le bureau (APP LOGISTIQUE)
 - Ouvrir login_app.py dans le dossier log avec Bloc-notes pour modifier l'adresse IP
 - Mettre la bonne adresse IP Oddo ligne 59 (adresse IP de la machine physique du serveur odoo)
 
