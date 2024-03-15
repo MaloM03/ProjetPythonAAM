@@ -81,7 +81,8 @@ services:
       - POSTGRES_PASSWORD=myodoo
       - POSTGRES_USER=odoo
 ```
-Valider puis attendre (environ 2min) l'installation des deux conteneurs odoo et postgreSQL vérifier la présence des deux conteneurs sur portainer.  
+Valider puis attendre (environ 2min) l'installation des deux conteneurs odoo et postgreSQL 
+vérifier la présence des deux conteneurs sur portainer.  
 Vérifier l'accès au serveur Odoo en allant sur : http://localhost:8069   
 
 ## 4/ Mise en place la base de données sur odoo
