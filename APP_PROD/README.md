@@ -5,8 +5,8 @@
 - Ouvrir login_app.py dans le dossier prod avec Bloc-notes pour modifier l'adresse IP  
 - Mettre la bonne adresse IP d'Odoo à la ligne 55 (adresse IP de la machine physique du serveur odoo)  
 - Ouvrez un terminal à l'emplacement du dossier  
-- Lancer le fichier setup_prod avec la commande cmd ./bash setup_prod.sh  
-- Après l'installation lancer le fichier launcher_prod.sh avec la commande ./bash launcher_prod.sh  
+- Lancer le fichier setup_prod.bat en double cliquant sur celui-ci  
+- Après l'installation lancer le fichier launcher_prod.bat en double cliquant sur celui-ci   
 
 ----------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------
